@@ -1,0 +1,848 @@
+{
+ "fetched": "11. november 2026",
+ "area": "Oslomarka",
+ "guests": 5,
+ "areaId": 1223,
+ "weeks": [
+  {
+   "from": "2026-11-13",
+   "to": "2026-11-15",
+   "rows": [
+    {
+     "id": "om-kjorestua-pa-sagvollen",
+     "name": "Kjørestua på Sagvollen",
+     "free": 8,
+     "total": 15,
+     "price": 7000
+    },
+    {
+     "id": "om-bovelstad",
+     "name": "Bøvelstad",
+     "free": 8,
+     "total": 17,
+     "price": 3450
+    },
+    {
+     "id": "om-smedmyrkoia",
+     "name": "Smedmyrkoia",
+     "free": 8,
+     "total": 8,
+     "price": 3450
+    },
+    {
+     "id": "om-breivoll-gard",
+     "name": "Breivoll Gård",
+     "free": null,
+     "total": null,
+     "price": 13150
+    },
+    {
+     "id": "om-vikkelihytta",
+     "name": "Vikkelihytta",
+     "free": 9,
+     "total": 9,
+     "price": 3450
+    },
+    {
+     "id": "om-kobberhaughytta",
+     "name": "Kobberhaughytta",
+     "free": null,
+     "total": null,
+     "price": 5200
+    },
+    {
+     "id": "om-gapahuk-saeteren-gard",
+     "name": "Gapahuk - Sæteren Gård",
+     "free": 20,
+     "total": 40,
+     "price": 5000
+    },
+    {
+     "id": "om-fjellvang",
+     "name": "Fjellvang",
+     "free": 6,
+     "total": 14,
+     "price": 3450
+    },
+    {
+     "id": "om-myrsetra",
+     "name": "Myrsetra",
+     "free": 7,
+     "total": 9,
+     "price": 3450
+    },
+    {
+     "id": "om-mustadkroken",
+     "name": "Mustadkroken",
+     "free": 30,
+     "total": 30,
+     "price": 6400
+    }
+   ]
+  },
+  {
+   "from": "2026-11-20",
+   "to": "2026-11-22",
+   "rows": [
+    {
+     "id": "om-gapahuk-saeteren-gard",
+     "name": "Gapahuk - Sæteren Gård",
+     "free": 40,
+     "total": 40,
+     "price": 1200
+    },
+    {
+     "id": "om-breivoll-gard",
+     "name": "Breivoll Gård",
+     "free": null,
+     "total": null,
+     "price": 13150
+    },
+    {
+     "id": "om-kobberhaughytta",
+     "name": "Kobberhaughytta",
+     "free": null,
+     "total": null,
+     "price": 5200
+    },
+    {
+     "id": "om-kjorestua-pa-sagvollen",
+     "name": "Kjørestua på Sagvollen",
+     "free": 8,
+     "total": 15,
+     "price": 7000
+    },
+    {
+     "id": "om-jorgenhytta",
+     "name": "Jørgenhytta",
+     "free": 5,
+     "total": 8,
+     "price": 900
+    },
+    {
+     "id": "om-vikkelihytta",
+     "name": "Vikkelihytta",
+     "free": 9,
+     "total": 9,
+     "price": 3450
+    },
+    {
+     "id": "om-rabjornhytta",
+     "name": "Råbjørnhytta",
+     "free": 5,
+     "total": 10,
+     "price": 3450
+    },
+    {
+     "id": "om-smedmyrkoia",
+     "name": "Smedmyrkoia",
+     "free": 6,
+     "total": 8,
+     "price": 3450
+    },
+    {
+     "id": "om-myrsetra",
+     "name": "Myrsetra",
+     "free": 9,
+     "total": 9,
+     "price": 3450
+    }
+   ]
+  },
+  {
+   "from": "2026-11-27",
+   "to": "2026-11-29",
+   "rows": [
+    {
+     "id": "om-vikkelihytta",
+     "name": "Vikkelihytta",
+     "free": 9,
+     "total": 9,
+     "price": 3450
+    },
+    {
+     "id": "om-breivoll-gard",
+     "name": "Breivoll Gård",
+     "free": null,
+     "total": null,
+     "price": 13150
+    },
+    {
+     "id": "om-snellingen",
+     "name": "Snellingen",
+     "free": 8,
+     "total": 8,
+     "price": 3450
+    },
+    {
+     "id": "om-kjorestua-pa-sagvollen",
+     "name": "Kjørestua på Sagvollen",
+     "free": 8,
+     "total": 15,
+     "price": 7000
+    },
+    {
+     "id": "om-bekkensten",
+     "name": "Bekkensten",
+     "free": 5,
+     "total": 14,
+     "price": 3450
+    },
+    {
+     "id": "om-gapahuk-saeteren-gard",
+     "name": "Gapahuk - Sæteren Gård",
+     "free": 40,
+     "total": 40,
+     "price": 1200
+    },
+    {
+     "id": "om-smedmyrkoia",
+     "name": "Smedmyrkoia",
+     "free": 6,
+     "total": 8,
+     "price": 3450
+    },
+    {
+     "id": "om-rabjornhytta",
+     "name": "Råbjørnhytta",
+     "free": 10,
+     "total": 10,
+     "price": 3450
+    },
+    {
+     "id": "om-babord-gressholmen",
+     "name": "Babord - Gressholmen",
+     "free": 12,
+     "total": 13,
+     "price": 3450
+    },
+    {
+     "id": "om-ovresaga",
+     "name": "Øvresaga",
+     "free": 5,
+     "total": 8,
+     "price": 3450
+    },
+    {
+     "id": "om-bovelstad",
+     "name": "Bøvelstad",
+     "free": 17,
+     "total": 17,
+     "price": 3450
+    },
+    {
+     "id": "om-kobberhaughytta",
+     "name": "Kobberhaughytta",
+     "free": null,
+     "total": null,
+     "price": 5200
+    },
+    {
+     "id": "om-myrsetra",
+     "name": "Myrsetra",
+     "free": 5,
+     "total": 9,
+     "price": 3450
+    },
+    {
+     "id": "om-katnosdammen",
+     "name": "Katnosdammen",
+     "free": 14,
+     "total": 14,
+     "price": 3450
+    },
+    {
+     "id": "om-ringkolltoppen",
+     "name": "Ringkolltoppen",
+     "free": 8,
+     "total": 11,
+     "price": 1700
+    }
+   ]
+  },
+  {
+   "from": "2026-12-04",
+   "to": "2026-12-06",
+   "rows": [
+    {
+     "id": "om-sjaforboligen-pa-elnestangen",
+     "name": "Sjåførboligen på Elnestangen",
+     "free": 8,
+     "total": 11,
+     "price": 3450
+    },
+    {
+     "id": "om-spikertjernhytta",
+     "name": "Spikertjernhytta",
+     "free": 8,
+     "total": 10,
+     "price": 1600
+    },
+    {
+     "id": "om-halvorsenhytta",
+     "name": "Halvorsenhytta",
+     "free": 9,
+     "total": 9,
+     "price": 3450
+    },
+    {
+     "id": "om-snellingen",
+     "name": "Snellingen",
+     "free": 8,
+     "total": 8,
+     "price": 3450
+    },
+    {
+     "id": "om-kobberhaughytta",
+     "name": "Kobberhaughytta",
+     "free": null,
+     "total": null,
+     "price": 5200
+    },
+    {
+     "id": "om-vikkelihytta",
+     "name": "Vikkelihytta",
+     "free": 9,
+     "total": 9,
+     "price": 3450
+    },
+    {
+     "id": "om-spettehytta-saeteren-gard",
+     "name": "Spettehytta - Sæteren Gård",
+     "free": 5,
+     "total": 5,
+     "price": 8000
+    },
+    {
+     "id": "om-saeteren-gard-hovedhus-sovehus",
+     "name": "Sæteren Gård - Hovedhus+Sovehus",
+     "free": null,
+     "total": null,
+     "price": 4050
+    },
+    {
+     "id": "om-gapahuk-saeteren-gard",
+     "name": "Gapahuk - Sæteren Gård",
+     "free": 40,
+     "total": 40,
+     "price": 1200
+    },
+    {
+     "id": "om-bekkensten",
+     "name": "Bekkensten",
+     "free": 9,
+     "total": 14,
+     "price": 3450
+    },
+    {
+     "id": "om-smedmyrkoia",
+     "name": "Smedmyrkoia",
+     "free": 8,
+     "total": 8,
+     "price": 3450
+    },
+    {
+     "id": "om-kjorestua-pa-sagvollen",
+     "name": "Kjørestua på Sagvollen",
+     "free": 8,
+     "total": 15,
+     "price": 7000
+    },
+    {
+     "id": "om-babord-gressholmen",
+     "name": "Babord - Gressholmen",
+     "free": 11,
+     "total": 13,
+     "price": 3450
+    },
+    {
+     "id": "om-store-tomtehytta",
+     "name": "Store Tømtehytta",
+     "free": 7,
+     "total": 8,
+     "price": 3450
+    },
+    {
+     "id": "om-rabjornhytta",
+     "name": "Råbjørnhytta",
+     "free": 10,
+     "total": 10,
+     "price": 3450
+    },
+    {
+     "id": "om-jorgenhytta",
+     "name": "Jørgenhytta",
+     "free": 8,
+     "total": 8,
+     "price": 900
+    },
+    {
+     "id": "om-fjellvang",
+     "name": "Fjellvang",
+     "free": 14,
+     "total": 14,
+     "price": 3450
+    },
+    {
+     "id": "om-katnosdammen",
+     "name": "Katnosdammen",
+     "free": 14,
+     "total": 14,
+     "price": 3450
+    },
+    {
+     "id": "om-ovresaga",
+     "name": "Øvresaga",
+     "free": 8,
+     "total": 8,
+     "price": 3450
+    },
+    {
+     "id": "om-myrsetra",
+     "name": "Myrsetra",
+     "free": 9,
+     "total": 9,
+     "price": 3450
+    },
+    {
+     "id": "om-bovelstad",
+     "name": "Bøvelstad",
+     "free": 17,
+     "total": 17,
+     "price": 3450
+    }
+   ]
+  },
+  {
+   "from": "2026-12-11",
+   "to": "2026-12-13",
+   "rows": [
+    {
+     "id": "om-kobberhaughytta",
+     "name": "Kobberhaughytta",
+     "free": null,
+     "total": null,
+     "price": 5200
+    },
+    {
+     "id": "om-kjorestua-pa-sagvollen",
+     "name": "Kjørestua på Sagvollen",
+     "free": 8,
+     "total": 15,
+     "price": 7000
+    },
+    {
+     "id": "om-snellingen",
+     "name": "Snellingen",
+     "free": 8,
+     "total": 8,
+     "price": 3450
+    },
+    {
+     "id": "om-katnosdammen",
+     "name": "Katnosdammen",
+     "free": 14,
+     "total": 14,
+     "price": 3450
+    },
+    {
+     "id": "om-smedmyrkoia",
+     "name": "Smedmyrkoia",
+     "free": 8,
+     "total": 8,
+     "price": 3450
+    },
+    {
+     "id": "om-ringkolltoppen",
+     "name": "Ringkolltoppen",
+     "free": 11,
+     "total": 11,
+     "price": 3450
+    },
+    {
+     "id": "om-store-tomtehytta",
+     "name": "Store Tømtehytta",
+     "free": 8,
+     "total": 8,
+     "price": 3450
+    },
+    {
+     "id": "om-myrsetra",
+     "name": "Myrsetra",
+     "free": 9,
+     "total": 9,
+     "price": 3450
+    },
+    {
+     "id": "om-spettehytta-saeteren-gard",
+     "name": "Spettehytta - Sæteren Gård",
+     "free": 5,
+     "total": 5,
+     "price": 8000
+    },
+    {
+     "id": "om-rabjornhytta",
+     "name": "Råbjørnhytta",
+     "free": 10,
+     "total": 10,
+     "price": 3450
+    },
+    {
+     "id": "om-ovresaga",
+     "name": "Øvresaga",
+     "free": 8,
+     "total": 8,
+     "price": 3450
+    },
+    {
+     "id": "om-bovelstad",
+     "name": "Bøvelstad",
+     "free": 17,
+     "total": 17,
+     "price": 3450
+    },
+    {
+     "id": "om-vikkelihytta",
+     "name": "Vikkelihytta",
+     "free": 9,
+     "total": 9,
+     "price": 3450
+    },
+    {
+     "id": "om-babord-gressholmen",
+     "name": "Babord - Gressholmen",
+     "free": 13,
+     "total": 13,
+     "price": 3450
+    },
+    {
+     "id": "om-gapahuk-saeteren-gard",
+     "name": "Gapahuk - Sæteren Gård",
+     "free": 40,
+     "total": 40,
+     "price": 1200
+    },
+    {
+     "id": "om-fjellvang",
+     "name": "Fjellvang",
+     "free": 14,
+     "total": 14,
+     "price": 3450
+    }
+   ]
+  },
+  {
+   "from": "2026-12-18",
+   "to": "2026-12-20",
+   "rows": [
+    {
+     "id": "om-fjellvang",
+     "name": "Fjellvang",
+     "free": 14,
+     "total": 14,
+     "price": 3450
+    },
+    {
+     "id": "om-rabjornhytta",
+     "name": "Råbjørnhytta",
+     "free": 10,
+     "total": 10,
+     "price": 3450
+    },
+    {
+     "id": "om-kjorestua-pa-sagvollen",
+     "name": "Kjørestua på Sagvollen",
+     "free": 8,
+     "total": 15,
+     "price": 7000
+    },
+    {
+     "id": "om-katnosdammen",
+     "name": "Katnosdammen",
+     "free": 12,
+     "total": 14,
+     "price": 3450
+    },
+    {
+     "id": "om-saeteren-gard-hovedhus-sovehus",
+     "name": "Sæteren Gård - Hovedhus+Sovehus",
+     "free": null,
+     "total": null,
+     "price": 4050
+    },
+    {
+     "id": "om-smedmyrkoia",
+     "name": "Smedmyrkoia",
+     "free": 8,
+     "total": 8,
+     "price": 3450
+    },
+    {
+     "id": "om-ringkolltoppen",
+     "name": "Ringkolltoppen",
+     "free": 11,
+     "total": 11,
+     "price": 3450
+    },
+    {
+     "id": "om-spettehytta-saeteren-gard",
+     "name": "Spettehytta - Sæteren Gård",
+     "free": 5,
+     "total": 5,
+     "price": 8000
+    },
+    {
+     "id": "om-bekkensten",
+     "name": "Bekkensten",
+     "free": 14,
+     "total": 14,
+     "price": 3450
+    },
+    {
+     "id": "om-gapahuk-saeteren-gard",
+     "name": "Gapahuk - Sæteren Gård",
+     "free": 40,
+     "total": 40,
+     "price": 1200
+    },
+    {
+     "id": "om-dolerud",
+     "name": "Dølerud",
+     "free": 8,
+     "total": 8,
+     "price": 3450
+    },
+    {
+     "id": "om-bovelstad",
+     "name": "Bøvelstad",
+     "free": 17,
+     "total": 17,
+     "price": 3450
+    },
+    {
+     "id": "om-styrbord-gressholmen",
+     "name": "Styrbord - Gressholmen",
+     "free": 28,
+     "total": 28,
+     "price": 6600
+    },
+    {
+     "id": "om-kobberhaughytta",
+     "name": "Kobberhaughytta",
+     "free": null,
+     "total": null,
+     "price": 5200
+    },
+    {
+     "id": "om-snellingen",
+     "name": "Snellingen",
+     "free": 8,
+     "total": 8,
+     "price": 3450
+    },
+    {
+     "id": "om-myrsetra",
+     "name": "Myrsetra",
+     "free": 9,
+     "total": 9,
+     "price": 3450
+    },
+    {
+     "id": "om-babord-gressholmen",
+     "name": "Babord - Gressholmen",
+     "free": 13,
+     "total": 13,
+     "price": 3450
+    },
+    {
+     "id": "om-svartvannshytta",
+     "name": "Svartvannshytta",
+     "free": 8,
+     "total": 8,
+     "price": 2700
+    },
+    {
+     "id": "om-ovresaga",
+     "name": "Øvresaga",
+     "free": 8,
+     "total": 8,
+     "price": 3450
+    },
+    {
+     "id": "om-vikkelihytta",
+     "name": "Vikkelihytta",
+     "free": 9,
+     "total": 9,
+     "price": 3450
+    }
+   ]
+  },
+  {
+   "from": "2026-12-25",
+   "to": "2026-12-27",
+   "rows": [
+    {
+     "id": "om-babord-gressholmen",
+     "name": "Babord - Gressholmen",
+     "free": 13,
+     "total": 13,
+     "price": 3450
+    },
+    {
+     "id": "om-smedmyrkoia",
+     "name": "Smedmyrkoia",
+     "free": 8,
+     "total": 8,
+     "price": 3450
+    },
+    {
+     "id": "om-rabjornhytta",
+     "name": "Råbjørnhytta",
+     "free": 10,
+     "total": 10,
+     "price": 3450
+    },
+    {
+     "id": "om-myrsetra",
+     "name": "Myrsetra",
+     "free": 9,
+     "total": 9,
+     "price": 3450
+    },
+    {
+     "id": "om-ovresaga",
+     "name": "Øvresaga",
+     "free": 8,
+     "total": 8,
+     "price": 3450
+    },
+    {
+     "id": "om-gapahuk-saeteren-gard",
+     "name": "Gapahuk - Sæteren Gård",
+     "free": 40,
+     "total": 40,
+     "price": 1200
+    },
+    {
+     "id": "om-snellingen",
+     "name": "Snellingen",
+     "free": 8,
+     "total": 8,
+     "price": 3450
+    },
+    {
+     "id": "om-halvorsenhytta",
+     "name": "Halvorsenhytta",
+     "free": 9,
+     "total": 9,
+     "price": 3450
+    },
+    {
+     "id": "om-nydalshytta",
+     "name": "Nydalshytta",
+     "free": 16,
+     "total": 16,
+     "price": 4200
+    },
+    {
+     "id": "om-store-tomtehytta",
+     "name": "Store Tømtehytta",
+     "free": 8,
+     "total": 8,
+     "price": 3450
+    },
+    {
+     "id": "om-fjellvang",
+     "name": "Fjellvang",
+     "free": 14,
+     "total": 14,
+     "price": 3450
+    },
+    {
+     "id": "om-bekkensten",
+     "name": "Bekkensten",
+     "free": 14,
+     "total": 14,
+     "price": 3450
+    },
+    {
+     "id": "om-styrbord-gressholmen",
+     "name": "Styrbord - Gressholmen",
+     "free": 28,
+     "total": 28,
+     "price": 6600
+    },
+    {
+     "id": "om-dolerud",
+     "name": "Dølerud",
+     "free": 8,
+     "total": 8,
+     "price": 3450
+    },
+    {
+     "id": "om-jorgenhytta",
+     "name": "Jørgenhytta",
+     "free": 8,
+     "total": 8,
+     "price": 900
+    },
+    {
+     "id": "om-spettehytta-saeteren-gard",
+     "name": "Spettehytta - Sæteren Gård",
+     "free": 5,
+     "total": 5,
+     "price": 8000
+    },
+    {
+     "id": "om-ringkolltoppen",
+     "name": "Ringkolltoppen",
+     "free": 11,
+     "total": 11,
+     "price": 3450
+    },
+    {
+     "id": "om-hovdehytta",
+     "name": "Hovdehytta",
+     "free": 8,
+     "total": 8,
+     "price": 2700
+    },
+    {
+     "id": "om-vikkelihytta",
+     "name": "Vikkelihytta",
+     "free": 9,
+     "total": 9,
+     "price": 3450
+    },
+    {
+     "id": "om-sjaforboligen-pa-elnestangen",
+     "name": "Sjåførboligen på Elnestangen",
+     "free": 11,
+     "total": 11,
+     "price": 3450
+    },
+    {
+     "id": "om-katnosdammen",
+     "name": "Katnosdammen",
+     "free": 14,
+     "total": 14,
+     "price": 3450
+    },
+    {
+     "id": "om-spikertjernhytta",
+     "name": "Spikertjernhytta",
+     "free": 6,
+     "total": 10,
+     "price": 900
+    },
+    {
+     "id": "om-bovelstad",
+     "name": "Bøvelstad",
+     "free": 17,
+     "total": 17,
+     "price": 3450
+    }
+   ]
+  }
+ ]
+}

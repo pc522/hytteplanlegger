@@ -1,0 +1,612 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Hytteplanleggeren</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Public+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: stedsskilt-vokabular. Rød T-merking, skogsgrønn for handling, kjølig steingrå flater. Tre faner: Hytter, Mine opphold, Slik booker du. */
+:root {
+  --bg: #eceff0;
+  --surface: #f8f9f9;
+  --surface-2: #e2e7e8;
+  --ink: #1a2625;
+  --ink-2: #4b5b59;
+  --line: #cdd5d6;
+  --forest: #2c5b4d;
+  --forest-ink: #ffffff;
+  --tmark: #c4302b;
+  --ok: #2c6b3f; --ok-bg: #dcebdf;
+  --staffed: #1d5d7a; --staffed-bg: #d9e8ef;
+  --closed: #9c3a2e; --closed-bg: #f0dcd8;
+  --warn: #8a5a0a; --warn-bg: #f4e7c8;
+  --muted-bg: #e6eaea;
+  --font-display: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --font-body: "Public Sans", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111817; --surface: #192322; --surface-2: #223130; --ink: #e6eeed; --ink-2: #9db0ad; --line: #2c3d3b;
+    --forest: #5fb496; --forest-ink: #0d1a16; --tmark: #e5524c;
+    --ok: #86d29b; --ok-bg: #1d3526; --staffed: #86c3e0; --staffed-bg: #1a3340;
+    --closed: #f0a89b; --closed-bg: #3f2420; --warn: #e8c274; --warn-bg: #3a2f14; --muted-bg: #1f2b2a;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111817; --surface: #192322; --surface-2: #223130; --ink: #e6eeed; --ink-2: #9db0ad; --line: #2c3d3b;
+  --forest: #5fb496; --forest-ink: #0d1a16; --tmark: #e5524c;
+  --ok: #86d29b; --ok-bg: #1d3526; --staffed: #86c3e0; --staffed-bg: #1a3340;
+  --closed: #f0a89b; --closed-bg: #3f2420; --warn: #e8c274; --warn-bg: #3a2f14; --muted-bg: #1f2b2a;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { margin: 0; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.5; padding-block: 0 48px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.wrap { max-width: 880px; margin: 0 auto; }
+h1, h2, h3 { font-family: var(--font-display); font-weight: 600; letter-spacing: .01em; text-wrap: balance; margin: 0; }
+button, input, select { font: inherit; color: inherit; }
+a { color: var(--forest); }
+:focus-visible { outline: 3px solid var(--forest); outline-offset: 2px; border-radius: 4px; }
+
+header.top { display: flex; gap: 14px; align-items: center; padding-block: 18px 12px; flex-wrap: wrap; }
+.tmark { width: 44px; height: 44px; flex: none; background: var(--tmark); color: #fff; display: grid; place-items: center; border-radius: 4px; }
+.titlebox { flex: 1 1 200px; min-width: 0; }
+h1 { font-size: 34px; line-height: 1; text-transform: uppercase; overflow-wrap: anywhere; }
+.sub { color: var(--ink-2); font-size: 13.5px; margin-top: 4px; }
+.datebox { display: flex; flex-direction: column; gap: 2px; }
+.datebox label { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-2); }
+input[type=date], input[type=text], input[type=number], select, input[type=search] {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 8px 10px; min-height: 40px; min-width: 0; width: 100%;
+}
+
+nav.tabs { display: flex; gap: 0; border-bottom: 2px solid var(--line); position: sticky; top: env(safe-area-inset-top, 0px); background: var(--bg); z-index: 5; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); background: var(--bg); z-index: 10; }
+.tab { flex: 1; text-align: center; background: none; border: 0; padding: 12px 6px; font-family: var(--font-display); font-weight: 600; font-size: 18px; letter-spacing: .03em; text-transform: uppercase; color: var(--ink-2); cursor: pointer; border-bottom: 4px solid transparent; margin-bottom: -2px; }
+.tab[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--tmark); }
+.count { display: inline-block; font-family: var(--font-body); font-size: 12px; background: var(--forest); color: var(--forest-ink); border-radius: 10px; padding: 0 7px; margin-left: 4px; vertical-align: 2px; }
+
+.panel { padding-top: 16px; display: flex; flex-direction: column; gap: 14px; }
+.notice { background: var(--surface); border: 1px solid var(--line); border-left: 5px solid var(--staffed); border-radius: 6px; padding: 10px 12px; font-size: 14px; }
+.notice.warn { border-left-color: var(--warn); }
+.notice p { margin: 0; }
+.notice .row { margin-top: 8px; }
+.row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+
+.btn { display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 8px 14px; border-radius: 6px; border: 1px solid var(--forest); background: var(--forest); color: var(--forest-ink); font-weight: 600; font-size: 14px; text-decoration: none; cursor: pointer; }
+.btn.ghost { background: transparent; color: var(--forest); }
+.btn.small { min-height: 34px; padding: 4px 10px; font-size: 13px; }
+.btn.danger { background: transparent; border-color: var(--closed); color: var(--closed); }
+
+.filters { display: flex; flex-direction: column; gap: 10px; }
+.chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.chip { border: 1px solid var(--line); background: var(--surface); border-radius: 18px; padding: 5px 12px; font-size: 13.5px; cursor: pointer; min-height: 34px; }
+.chip[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.summary { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; font-size: 14px; color: var(--ink-2); }
+
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 380px), 1fr)); gap: 12px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.card h3 { font-size: 24px; line-height: 1.1; }
+.meta { color: var(--ink-2); font-size: 13px; display: flex; gap: 4px 10px; flex-wrap: wrap; }
+.pill { display: inline-block; border-radius: 4px; padding: 2px 8px; font-size: 12.5px; font-weight: 600; }
+.pill.open { background: var(--ok-bg); color: var(--ok); }
+.pill.staffed { background: var(--staffed-bg); color: var(--staffed); }
+.pill.closed { background: var(--closed-bg); color: var(--closed); }
+.pill.unknown { background: var(--warn-bg); color: var(--warn); }
+.pill.neutral { background: var(--muted-bg); color: var(--ink-2); }
+.card p { margin: 0; font-size: 14px; }
+.card .actions { margin-top: auto; padding-top: 4px; }
+.approx { font-size: 12.5px; color: var(--ink-2); }
+
+.formcard { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px; }
+.formcard h2 { font-size: 22px; margin-bottom: 10px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; align-items: end; }
+.field { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.field label { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-2); }
+.field.wide { grid-column: 1 / -1; }
+
+.tripblock { display: flex; flex-direction: column; gap: 8px; }
+.triphead { display: flex; gap: 8px; align-items: baseline; justify-content: space-between; flex-wrap: wrap; border-bottom: 2px solid var(--ink); padding-bottom: 4px; }
+.triphead h2 { font-size: 26px; text-transform: uppercase; }
+.stop { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px; display: grid; grid-template-columns: 74px minmax(0, 1fr); gap: 4px 12px; }
+.datecol { font-family: var(--font-display); text-align: center; border-right: 1px solid var(--line); padding-right: 10px; }
+.datecol .d { font-size: 34px; font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums; }
+.datecol .m { font-size: 14px; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-2); }
+.datecol .n { font-size: 13px; color: var(--ink-2); margin-top: 4px; font-family: var(--font-body); }
+.stopbody { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.stopbody h3 { font-size: 22px; line-height: 1.1; }
+.flag { font-size: 13.5px; padding: 5px 9px; border-radius: 4px; }
+.flag.bad { background: var(--closed-bg); color: var(--closed); }
+.flag.warn { background: var(--warn-bg); color: var(--warn); }
+.flag.info { background: var(--staffed-bg); color: var(--staffed); }
+.gap { font-size: 13px; color: var(--warn); padding-left: 86px; }
+.stop.done { opacity: .72; }
+.stoprow { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.stoprow select { width: auto; min-height: 36px; padding: 4px 8px; }
+.stoprow input[type=text] { flex: 1 1 160px; min-height: 36px; }
+.empty { text-align: center; padding: 28px 16px; background: var(--surface); border: 1px dashed var(--line); border-radius: 8px; }
+.empty h2 { font-size: 24px; margin-bottom: 6px; }
+.empty p { margin: 0 auto 12px; max-width: 46ch; color: var(--ink-2); }
+
+.guide ol, .guide ul { margin: 6px 0 0; padding-left: 22px; }
+.guide li { margin-bottom: 6px; }
+.guide section { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px; }
+.guide h2 { font-size: 24px; }
+.src { font-size: 12.5px; color: var(--ink-2); }
+footer { margin-top: 28px; font-size: 12.5px; color: var(--ink-2); border-top: 1px solid var(--line); padding-top: 10px; }
+.weeks { display: flex; gap: 6px; flex-wrap: wrap; }
+.week { border: 1px solid var(--line); background: var(--surface); border-radius: 8px; padding: 6px 12px; cursor: pointer; min-height: 44px; text-align: left; line-height: 1.2; }
+.week .wd { font-family: var(--font-display); font-size: 20px; font-weight: 700; display: block; }
+.week .wn { font-size: 12px; color: var(--ink-2); }
+.week[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.week[aria-pressed="true"] .wn { color: var(--bg); opacity: .8; }
+.price { font-family: var(--font-display); font-size: 22px; font-weight: 600; }
+.avrow { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.always { background: var(--ok-bg); color: var(--ok); border-radius: 6px; padding: 8px 12px; font-size: 14px; }
+[hidden] { display: none !important; }
+@media (max-width: 480px) { .tab { font-size: 15px; padding: 12px 2px; letter-spacing: 0; } h1 { font-size: 30px; } .stop { grid-template-columns: 62px minmax(0, 1fr); } .gap { padding-left: 74px; } }
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="tmark" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 26 26"><rect x="3" y="3" width="20" height="5" fill="currentColor"/><rect x="10.5" y="3" width="5" height="20" fill="currentColor"/></svg></div>
+    <div class="titlebox">
+      <h1>Hytteplanleggeren</h1>
+      <div class="sub">Åpningstid, regler og bookinger for DNT-hytter på ett sted</div>
+    </div>
+    <div class="datebox">
+      <label for="checkDate">Sjekk status for dato</label>
+      <input type="date" id="checkDate">
+    </div>
+  </header>
+
+  <nav class="tabs" role="tablist" aria-label="Visninger">
+    <button class="tab" role="tab" id="tab-hytter" data-tab="hytter">Hytter</button>
+    <button class="tab" role="tab" id="tab-ledighet" data-tab="ledighet">Ledighet</button>
+    <button class="tab" role="tab" id="tab-opphold" data-tab="opphold">Mine opphold<span class="count" id="stopCount" hidden></span></button>
+    <button class="tab" role="tab" id="tab-guide" data-tab="guide">Slik booker du</button>
+  </nav>
+
+  <main>
+    <section class="panel" id="panel-hytter" role="tabpanel" aria-labelledby="tab-hytter"></section>
+    <section class="panel" id="panel-ledighet" role="tabpanel" aria-labelledby="tab-ledighet" hidden></section>
+    <section class="panel" id="panel-opphold" role="tabpanel" aria-labelledby="tab-opphold" hidden></section>
+    <section class="panel guide" id="panel-guide" role="tabpanel" aria-labelledby="tab-guide" hidden></section>
+  </main>
+
+  <footer>Samlet fra UT.no og dnt.no, 7. november 2026. Åpningstider og vilkår endres, så sjekk alltid hytta på UT.no før du drar. Ledighet i fanen Ledighet er et øyeblikksbilde fra DNTs bookingportal og endres fort. Oppholdene dine lagres bare i denne nettleseren.</footer>
+</div>
+
+<script>
+(function () {
+  var BOOKING_URL = "https://hyttebestilling.dnt.no/";
+  var ut = function (id) { return "https://ut.no/hytte/" + id; };
+
+  /* Hyttedata: bare det som er bekreftet på UT.no / dnt.no. null = ikke oppgitt. */
+  var CABINS = [
+    { id: "sandhaug", name: "Sandhaug selvbetjent", area: "Hardangervidda", kind: "Selvbetjent kvarter", beds: 12, bookBeds: 6, book: true, dog: "Hundebur (4 stk) med egen inngang", url: ut("10908406"),
+      note: "Selvbetjent kvarter, bare i bruk når den betjente hovedhytta er stengt. Betjent 26. juni til 6. sep.",
+      rules: [
+        { yearly: ["10-15", "02-29"], kind: "closed", label: "Stengt (15. okt til 1. mars)" },
+        { yearly: ["04-10", "06-15"], kind: "closed", label: "Stengt for kalving", approx: "Gjelder fra etter påske til midten av juni. Datoene varierer fra år til år." },
+        { yearly: ["06-26", "09-06"], kind: "staffed", label: "Betjent hovedhytte", approx: "Selvbetjent kvarter er ikke i bruk når hovedhytta er betjent." }
+      ], def: { kind: "open", label: "Åpent, selvbetjent" } },
+    { id: "litlos", name: "Litlos selvbetjent", area: "Hardangervidda", kind: "Selvbetjent", beds: null, bookBeds: null, book: true, dog: null, url: ut("10908405"),
+      note: "DNT stenger hyttene sør for Rv 7 og nord for E 134 i kalvingstiden og 15. okt til 28. feb. De er da låst med DNT-nøkkel.",
+      rules: [
+        { yearly: ["10-15", "02-29"], kind: "closed", label: "Stengt (15. okt til 28. feb)" },
+        { yearly: ["04-10", "06-15"], kind: "closed", label: "Stengt for kalving", approx: "Kalvingstiden varierer fra år til år." }
+      ], def: { kind: "open", label: "Åpent, selvbetjent" } },
+    { id: "kjeldebu", name: "Kjeldebu", area: "Hardangervidda", kind: "Selvbetjent", beds: null, bookBeds: null, book: true, dog: null, url: ut("10630"),
+      note: "Fire hytter ved Kjeldo, åpnet 1977. Senga kan tildeles andre etter kl. 19.00, men bookingen er fortsatt gyldig.", rules: [], def: null },
+    { id: "iungsdalshytta", name: "Iungsdalshytta selvbetjent", area: "Hardangervidda", kind: "Selvbetjent", beds: null, bookBeds: null, book: true, dog: null, url: ut("10908408"),
+      note: "Ligger ved hovedhytta, merket med stor T. Låst med DNTs standardnøkkel.", rules: [], def: null },
+    { id: "finsehytta", name: "Finsehytta", area: "Hardangervidda", kind: "Betjent", beds: null, bookBeds: null, book: true, dog: "To hunderom (4 og 6 plasser)", url: "https://www.dnt.no/hytter/betjente/finsehytta/english/booking",
+      note: "Tre sovesaler (10, 7 og 8 senger). Hund bestilles via bookingportalen.", rules: [], def: null },
+    { id: "gjendebu", name: "Gjendebu selvbetjent", area: "Jotunheimen", kind: "Selvbetjent", beds: null, bookBeds: null, book: true, dog: null, url: ut("10908403"),
+      note: "Kan nås med kollektivtransport om sommeren.", rules: [], def: null },
+    { id: "glitterheim", name: "Glitterheim selvbetjent", area: "Jotunheimen", kind: "Selvbetjent", beds: null, bookBeds: null, book: null, dog: null, url: ut("10902012"),
+      note: "Selvbetjent kvarter ved den betjente hovedhytta.", rules: [], def: null },
+    { id: "skogadalsboen", name: "Skogadalsbøen selvbetjent", area: "Jotunheimen", kind: "Selvbetjent", beds: null, bookBeds: null, book: null, dog: null, url: ut("10908402"),
+      note: "Ligger nederst på tunet, forbi hovedhuset, vedlageret og toalettet.", rules: [], def: null },
+    { id: "nordstedalseter", name: "Nørdstedalseter selvbetjent", area: "Jotunheimen", kind: "Selvbetjent", beds: 6, bookBeds: 4, book: true, dog: "Bur i uthus", url: ut("10908407"),
+      note: "Låst med DNTs standardnøkkel. Ca. 27 km kvistet løype fra Sota Sæter om vinteren.",
+      rules: [{ range: ["2026-04-20", "2026-06-26"], kind: "closed", label: "Stengt (anleggsarbeid)", approx: "Gjelder 20. april til 26. juni 2026. Ta kontakt med vertskapet ved behov." }], def: null },
+    { id: "fannarak", name: "Fannaråkhytta", area: "Jotunheimen", kind: "Betjent", beds: null, bookBeds: null, book: true, dog: null, url: null,
+      note: "Drives av DNT Oslo og Omegn. Priser står på dnt.no.", rules: [], def: null },
+    { id: "innerdalshytta", name: "Innerdalshytta", area: "Trollheimen og Nordmøre", kind: "Betjent og selvbetjent", beds: 81, bookBeds: null, book: true, dog: "Tre rom for hund og eier", url: ut("10940/innerdalshytta"), assoc: "KNT",
+      note: "Nyhytta, Gammelhytta og Låven. Ca. halvparten av sengene på Låven kan bookes i selvbetjent sesong. Booking for 2027 åpner i begynnelsen av november 2026.",
+      rules: [
+        { range: ["2026-06-19", "2026-09-13"], kind: "staffed", label: "Betjent" },
+        { range: ["2026-09-14", "2027-06-18"], kind: "open", label: "Åpent, selvbetjent" },
+        { range: ["2027-06-19", "2027-09-15"], kind: "staffed", label: "Betjent (ca.)", approx: "For 2027 er det oppgitt medio juni til medio september." }
+      ], def: null },
+    { id: "aursjohytta", name: "Aursjøhytta", area: "Trollheimen og Nordmøre", kind: "Betjent og selvbetjent", beds: null, bookBeds: null, book: true, dog: null, url: ut("10447"), assoc: "KNT",
+      note: "Selvbetjent periode 7. sep 2026 til 1. juni 2027, og ca. halvparten av sengene kan bookes.",
+      rules: [{ range: ["2026-09-07", "2027-06-01"], kind: "open", label: "Åpent, selvbetjent" }], def: null },
+    { id: "loennechenbua", name: "Loennechenbua", area: "Trollheimen og Nordmøre", kind: "Selvbetjent", beds: 4, bookBeds: null, book: true, dog: null, url: ut("10793"), assoc: "KNT",
+      note: "Fire sengeplasser. Rute fra Jenstad, Gammelsætra, Åmotdalshytta og Dindalshytta.", rules: [], def: { kind: "open", label: "Åpent hele året" } },
+    { id: "bjordalsbu", name: "Bjørdalsbu", area: "Skarvheimen og Breheimen", kind: "Selvbetjent", beds: null, bookBeds: null, book: null, dog: "Isolert rom i sikringshytta, to hundebur", url: ut("10812"),
+      note: "Hundeburene har ingen oppvarming.", rules: [], def: null },
+    { id: "arentzbu", name: "Arentzbu", area: "Skarvheimen og Breheimen", kind: "Selvbetjent", beds: null, bookBeds: null, book: null, dog: "Hundebur i uthus", url: ut("101098"),
+      note: "Fredet av Riksantikvaren i 2009. Ikke hund i oppholdsrom, spiserom og soverom.", rules: [], def: null },
+    { id: "om-babord-gressholmen", name: "Babord - Gressholmen", area: "Oslomarka", kind: "DNT-hytte", beds: null, bookBeds: null, book: true, dog: null, url: null,
+      note: "Ledighet er hentet fra bookingportalen (se fanen Ledighet). Åpningstid og vilkår står på hyttesiden i portalen.", rules: [], def: null },
+    { id: "om-bekkensten", name: "Bekkensten", area: "Oslomarka", kind: "DNT-hytte", beds: null, bookBeds: null, book: true, dog: null, url: null,
+      note: "Ledighet er hentet fra bookingportalen (se fanen Ledighet). Åpningstid og vilkår står på hyttesiden i portalen.", rules: [], def: null },
+    { id: "om-breivoll-gard", name: "Breivoll Gård", area: "Oslomarka", kind: "DNT-hytte", beds: null, bookBeds: null, book: true, dog: null, url: null,
+      note: "Ledighet er hentet fra bookingportalen (se fanen Ledighet). Åpningstid og vilkår står på hyttesiden i portalen.", rules: [], def: null },
+    { id: "om-bovelstad", name: "Bøvelstad", area: "Oslomarka", kind: "DNT-hytte", beds: null, bookBeds: null, book: true, dog: null, url: null,
+      note: "Ledighet er hentet fra bookingportalen (se fanen Ledighet). Åpningstid og vilkår står på hyttesiden i portalen.", rules: [], def: null },
+    { id: "om-dolerud", name: "Dølerud", area: "Oslomarka", kind: "DNT-hytte", beds: null, bookBeds: null, book: true, dog: null, url: null,
+      note: "Ledighet er hentet fra bookingportalen (se fanen Ledighet). Åpningstid og vilkår står på hyttesiden i portalen.", rules: [], def: null },
+    { id: "om-fjellvang", name: "Fjellvang", area: "Oslomarka", kind: "DNT-hytte", beds: null, bookBeds: null, book: true, dog: null, url: null,
+      note: "Ledighet er hentet fra bookingportalen (se fanen Ledighet). Åpningstid og vilkår står på hyttesiden i portalen.", rules: [], def: null },
+    { id: "om-gapahuk-saeteren-gard", name: "Gapahuk - Sæteren Gård", area: "Oslomarka", kind: "DNT-hytte", beds: null, bookBeds: null, book: true, dog: null, url: null,
+      note: "Ledighet er hentet fra bookingportalen (se fanen Ledighet). Åpningstid og vilkår står på hyttesiden i portalen.", rules: [], def: null },
+    { id: "om-halvorsenhytta", name: "Halvorsenhytta", area: "Oslomarka", kind: "DNT-hytte", beds: null, bookBeds: null, book: true, dog: null, url: null,
+      note: "Ledighet er hentet fra bookingportalen (se fanen Ledighet). Åpningstid og vilkår står på hyttesiden i portalen.", rules: [], def: null },
+    { id: "om-hovdehytta", name: "Hovdehytta", area: "Oslomarka", kind: "DNT-hytte", beds: null, bookBeds: null, book: true, dog: null, url: null,
+      note: "Ledighet er hentet fra bookingportalen (se fanen Ledighet). Åpningstid og vilkår står på hyttesiden i portalen.", rules: [], def: null },
+    { id: "om-jorgenhytta", name: "Jørgenhytta", area: "Oslomarka", kind: "DNT-hytte", beds: null, bookBeds: null, book: true, dog: null, url: null,
+      note: "Ledighet er hentet fra bookingportalen (se fanen Ledighet). Åpningstid og vilkår står på hyttesiden i portalen.", rules: [], def: null },
+    { id: "om-katnosdammen", name: "Katnosdammen", area: "Oslomarka", kind: "DNT-hytte", beds: null, bookBeds: null, book: true, dog: null, url: null,
+      note: "Ledighet er hentet fra bookingportalen (se fanen Ledighet). Åpningstid og vilkår står på hyttesiden i portalen.", rules: [], def: null },
+    { id: "om-kjorestua-pa-sagvollen", name: "Kjørestua på Sagvollen", area: "Oslomarka", kind: "DNT-hytte", beds: null, bookBeds: null, book: true, dog: null, url: null,
+      note: "Ledighet er hentet fra bookingportalen (se fanen Ledighet). Åpningstid og vilkår står på hyttesiden i portalen.", rules: [], def: null },
+    { id: "om-kobberhaughytta", name: "Kobberhaughytta", area: "Oslomarka", kind: "DNT-hytte", beds: null, bookBeds: null, book: true, dog: null, url: null,
+      note: "Ledighet er hentet fra bookingportalen (se fanen Ledighet). Åpningstid og vilkår står på hyttesiden i portalen.", rules: [], def: null },
+    { id: "om-mustadkroken", name: "Mustadkroken", area: "Oslomarka", kind: "DNT-hytte", beds: null, bookBeds: null, book: true, dog: null, url: null,
+      note: "Ledighet er hentet fra bookingportalen (se fanen Ledighet). Åpningstid og vilkår står på hyttesiden i portalen.", rules: [], def: null },
+    { id: "om-myrsetra", name: "Myrsetra", area: "Oslomarka", kind: "DNT-hytte", beds: null, bookBeds: null, book: true, dog: null, url: null,
+      note: "Ledighet er hentet fra bookingportalen (se fanen Ledighet). Åpningstid og vilkår står på hyttesiden i portalen.", rules: [], def: null },
+    { id: "om-nydalshytta", name: "Nydalshytta", area: "Oslomarka", kind: "DNT-hytte", beds: null, bookBeds: null, book: true, dog: null, url: null,
+      note: "Ledighet er hentet fra bookingportalen (se fanen Ledighet). Åpningstid og vilkår står på hyttesiden i portalen.", rules: [], def: null },
+    { id: "om-ringkolltoppen", name: "Ringkolltoppen", area: "Oslomarka", kind: "DNT-hytte", beds: null, bookBeds: null, book: true, dog: null, url: null,
+      note: "Ledighet er hentet fra bookingportalen (se fanen Ledighet). Åpningstid og vilkår står på hyttesiden i portalen.", rules: [], def: null },
+    { id: "om-rabjornhytta", name: "Råbjørnhytta", area: "Oslomarka", kind: "DNT-hytte", beds: null, bookBeds: null, book: true, dog: null, url: null,
+      note: "Ledighet er hentet fra bookingportalen (se fanen Ledighet). Åpningstid og vilkår står på hyttesiden i portalen.", rules: [], def: null },
+    { id: "om-sjaforboligen-pa-elnestangen", name: "Sjåførboligen på Elnestangen", area: "Oslomarka", kind: "DNT-hytte", beds: null, bookBeds: null, book: true, dog: null, url: null,
+      note: "Ledighet er hentet fra bookingportalen (se fanen Ledighet). Åpningstid og vilkår står på hyttesiden i portalen.", rules: [], def: null },
+    { id: "om-smedmyrkoia", name: "Smedmyrkoia", area: "Oslomarka", kind: "DNT-hytte", beds: null, bookBeds: null, book: true, dog: null, url: null,
+      note: "Ledighet er hentet fra bookingportalen (se fanen Ledighet). Åpningstid og vilkår står på hyttesiden i portalen.", rules: [], def: null },
+    { id: "om-snellingen", name: "Snellingen", area: "Oslomarka", kind: "DNT-hytte", beds: null, bookBeds: null, book: true, dog: null, url: null,
+      note: "Ledighet er hentet fra bookingportalen (se fanen Ledighet). Åpningstid og vilkår står på hyttesiden i portalen.", rules: [], def: null },
+    { id: "om-spettehytta-saeteren-gard", name: "Spettehytta - Sæteren Gård", area: "Oslomarka", kind: "DNT-hytte", beds: null, bookBeds: null, book: true, dog: null, url: null,
+      note: "Ledighet er hentet fra bookingportalen (se fanen Ledighet). Åpningstid og vilkår står på hyttesiden i portalen.", rules: [], def: null },
+    { id: "om-spikertjernhytta", name: "Spikertjernhytta", area: "Oslomarka", kind: "DNT-hytte", beds: null, bookBeds: null, book: true, dog: null, url: null,
+      note: "Ledighet er hentet fra bookingportalen (se fanen Ledighet). Åpningstid og vilkår står på hyttesiden i portalen.", rules: [], def: null },
+    { id: "om-store-tomtehytta", name: "Store Tømtehytta", area: "Oslomarka", kind: "DNT-hytte", beds: null, bookBeds: null, book: true, dog: null, url: null,
+      note: "Ledighet er hentet fra bookingportalen (se fanen Ledighet). Åpningstid og vilkår står på hyttesiden i portalen.", rules: [], def: null },
+    { id: "om-styrbord-gressholmen", name: "Styrbord - Gressholmen", area: "Oslomarka", kind: "DNT-hytte", beds: null, bookBeds: null, book: true, dog: null, url: null,
+      note: "Ledighet er hentet fra bookingportalen (se fanen Ledighet). Åpningstid og vilkår står på hyttesiden i portalen.", rules: [], def: null },
+    { id: "om-svartvannshytta", name: "Svartvannshytta", area: "Oslomarka", kind: "DNT-hytte", beds: null, bookBeds: null, book: true, dog: null, url: null,
+      note: "Ledighet er hentet fra bookingportalen (se fanen Ledighet). Åpningstid og vilkår står på hyttesiden i portalen.", rules: [], def: null },
+    { id: "om-saeteren-gard-hovedhus-sovehus", name: "Sæteren Gård - Hovedhus+Sovehus", area: "Oslomarka", kind: "DNT-hytte", beds: null, bookBeds: null, book: true, dog: null, url: null,
+      note: "Ledighet er hentet fra bookingportalen (se fanen Ledighet). Åpningstid og vilkår står på hyttesiden i portalen.", rules: [], def: null },
+    { id: "om-vikkelihytta", name: "Vikkelihytta", area: "Oslomarka", kind: "DNT-hytte", beds: null, bookBeds: null, book: true, dog: null, url: null,
+      note: "Ledighet er hentet fra bookingportalen (se fanen Ledighet). Åpningstid og vilkår står på hyttesiden i portalen.", rules: [], def: null },
+    { id: "om-ovresaga", name: "Øvresaga", area: "Oslomarka", kind: "DNT-hytte", beds: null, bookBeds: null, book: true, dog: null, url: null,
+      note: "Ledighet er hentet fra bookingportalen (se fanen Ledighet). Åpningstid og vilkår står på hyttesiden i portalen.", rules: [], def: null }
+  ];
+
+  /* Ledighet: øyeblikksbilde fra hyttebestilling.dnt.no. Oslomarka, 5 gjester, fredag til søndag. */
+  var AVAIL = null; /* lastes fra data/ledighet.json */
+  var AREAS = ["Hardangervidda", "Jotunheimen", "Trollheimen og Nordmøre", "Skarvheimen og Breheimen", "Oslomarka"];
+  var STATUSES = ["Planlagt", "Bestilt", "Betalt", "Avbestilt"];
+  var byId = {}; CABINS.forEach(function (c) { byId[c.id] = c; });
+
+  /* ---------- datohjelp ---------- */
+  function iso(d) { var m = d.getMonth() + 1, day = d.getDate(); return d.getFullYear() + "-" + (m < 10 ? "0" : "") + m + "-" + (day < 10 ? "0" : "") + day; }
+  function parse(s) { var p = s.split("-"); return new Date(+p[0], +p[1] - 1, +p[2]); }
+  function addDays(s, n) { var d = parse(s); d.setDate(d.getDate() + n); return iso(d); }
+  function diffDays(a, b) { return Math.round((parse(a) - parse(b)) / 86400000); }
+  var TODAY = iso(new Date());
+  function fmtDate(s, withYear) { return parse(s).toLocaleDateString("nb-NO", { weekday: "short", day: "numeric", month: "short", year: withYear ? "numeric" : undefined }); }
+  function inYearly(s, from, to) { var m = s.slice(5); return from <= to ? (m >= from && m <= to) : (m >= from || m <= to); }
+
+  function statusFor(c, s) {
+    for (var i = 0; i < c.rules.length; i++) {
+      var r = c.rules[i];
+      var hit = r.range ? (s >= r.range[0] && s <= r.range[1]) : inYearly(s, r.yearly[0], r.yearly[1]);
+      if (hit) return { kind: r.kind, label: r.label, approx: r.approx || "" };
+    }
+    if (c.def) return { kind: c.def.kind, label: c.def.label, approx: "" };
+    return { kind: "unknown", label: "Åpningstid ikke bekreftet", approx: "Se åpningstider på UT.no." };
+  }
+
+  /* ---------- tilstand ---------- */
+  var state = { tab: "hytter", week: 0, date: TODAY, q: "", areas: {}, kinds: {}, dog: false, book: false, stops: [], form: { cabin: "", trip: "Min tur", date: TODAY, nights: 1, guests: 2 }, stored: false, loadErr: "" };
+  var col = null;
+
+  function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (ch) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch]; }); }
+  function uid() { return "s" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6); }
+  function lsGet(k, d) { try { var v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (e) { return d; } }
+  function lsSet(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+
+  function persist(stop) { if (col) col.doc(stop.id).set(stop).catch(function () { state.loadErr = "Kunne ikke lagre endringen. Prøv igjen."; render(); }); }
+  function remove(id) { if (col) col.doc(id).delete().catch(function () {}); }
+
+  /* ---------- Hytter ---------- */
+  function cabinMatches(c) {
+    var q = state.q.trim().toLowerCase();
+    if (q && (c.name + " " + c.area + " " + (c.assoc || "")).toLowerCase().indexOf(q) < 0) return false;
+    var a = Object.keys(state.areas).filter(function (k) { return state.areas[k]; });
+    if (a.length && a.indexOf(c.area) < 0) return false;
+    var k = Object.keys(state.kinds).filter(function (x) { return state.kinds[x]; });
+    if (k.length) {
+      var isStaffed = c.kind.indexOf("Betjent") === 0, isSelf = c.kind.toLowerCase().indexOf("selvbetjent") >= 0;
+      var ok = (state.kinds.betjent && isStaffed) || (state.kinds.selv && isSelf);
+      if (!ok) return false;
+    }
+    if (state.dog && !c.dog) return false;
+    if (state.book && c.book !== true) return false;
+    return true;
+  }
+  function chip(key, label, on, attr) { return '<button class="chip" type="button" aria-pressed="' + (on ? "true" : "false") + '" data-chip="' + attr + '" data-key="' + esc(key) + '">' + esc(label) + "</button>"; }
+
+  function renderHytter() {
+    var list = CABINS.filter(cabinMatches);
+    var counts = { open: 0, staffed: 0, closed: 0, unknown: 0 };
+    list.forEach(function (c) { counts[statusFor(c, state.date).kind]++; });
+    var html = '<div class="notice"><p>Hvor mange senger som er ledige på en bestemt dato finnes bare i DNTs bookingportal. Her ser du åpningstid for valgt dato, regler og hvilke hytter som kan bookes, og kan legge dem inn i turen din.</p><div class="row"><a class="btn small" href="' + BOOKING_URL + '" target="_blank" rel="noopener">Åpne bookingportalen</a></div></div>';
+    html += '<div class="filters"><input type="search" id="q" placeholder="Søk etter hytte eller område" aria-label="Søk etter hytte eller område" value="' + esc(state.q) + '">';
+    html += '<div class="chips" aria-label="Område">' + AREAS.map(function (a) { return chip(a, a, !!state.areas[a], "area"); }).join("") + "</div>";
+    html += '<div class="chips" aria-label="Filtre">' + chip("betjent", "Betjent", !!state.kinds.betjent, "kind") + chip("selv", "Selvbetjent", !!state.kinds.selv, "kind") + chip("dog", "Hund mulig", state.dog, "dog") + chip("book", "Kan bookes", state.book, "book") + "</div></div>";
+    html += '<div class="summary"><strong style="color:var(--ink)">' + esc(fmtDate(state.date, true)) + ":</strong> " +
+      '<span class="pill open">' + counts.open + " åpne</span> <span class=\"pill staffed\">" + counts.staffed + " betjent</span> <span class=\"pill closed\">" + counts.closed + " stengt</span> <span class=\"pill unknown\">" + counts.unknown + " ikke bekreftet</span></div>";
+    if (!list.length) html += '<div class="empty"><h2>Ingen treff</h2><p>Ingen hytter passer filtrene. Fjern et filter for å se flere.</p></div>';
+    html += '<div class="cards">' + list.map(function (c) {
+      var st = statusFor(c, state.date);
+      var beds = c.beds ? c.beds + " sengeplasser" + (c.bookBeds ? ", " + c.bookBeds + " kan bookes" : "") : "";
+      var bookTxt = c.book === true ? "Kan bookes i portalen" : "Sjekk booking på UT.no";
+      return '<article class="card"><div><h3>' + esc(c.name) + '</h3><div class="meta"><span>' + esc(c.area) + "</span><span>" + esc(c.kind) + "</span>" + (c.assoc ? "<span>" + esc(c.assoc) + "</span>" : "") + (beds ? "<span>" + esc(beds) + "</span>" : "") + "</div></div>" +
+        '<div><span class="pill ' + st.kind + '">' + esc(st.label) + "</span>" + (st.approx ? ' <span class="approx">' + esc(st.approx) + "</span>" : "") + "</div>" +
+        "<p>" + esc(c.note) + "</p>" +
+        '<div class="meta"><span class="pill neutral">' + bookTxt + "</span>" + (c.dog ? '<span class="pill neutral">Hund: ' + esc(c.dog) + "</span>" : "") + "</div>" +
+        '<div class="row actions"><button class="btn small" type="button" data-add="' + c.id + '">Legg til i tur</button>' +
+        (c.url ? '<a class="btn small ghost" href="' + c.url + '" target="_blank" rel="noopener">Hytta på UT.no</a>' : "") +
+        '<a class="btn small ghost" href="' + BOOKING_URL + '" target="_blank" rel="noopener">Book</a></div></article>';
+    }).join("") + "</div>";
+    return html;
+  }
+
+
+  /* ---------- Ledighet ---------- */
+  function portalUrl(w) { return BOOKING_URL + "kart?value=" + AVAIL.areaId + "&type=area&fromDate=" + w.from + "&toDate=" + w.to + "&numberOfGuests=" + AVAIL.guests + "&adults=" + AVAIL.guests; }
+  function kr(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, " ") + ",-"; }
+  function liveWeeks() { return AVAIL.weeks.filter(function (x) { return x.to >= TODAY; }); }
+  function renderLedighet() {
+    if (!AVAIL) return '<div class="empty"><h2>Ledighet er ikke lastet</h2><p>Fant ikke data/ledighet.json. Last siden på nytt, eller åpne bookingportalen direkte.</p><a class="btn" href="' + BOOKING_URL + '" target="_blank" rel="noopener">Åpne bookingportalen</a></div>';
+    if (!liveWeeks().length) return '<div class="empty"><h2>Ingen kommende helger</h2><p>Alle helgene i øyeblikksbildet er passert. Åpne bookingportalen for oppdatert ledighet.</p><a class="btn" href="' + BOOKING_URL + '" target="_blank" rel="noopener">Åpne bookingportalen</a></div>';
+    var w = liveWeeks()[state.week] || liveWeeks()[0];
+    var html = '<div class="notice"><p><strong>Øyeblikksbilde fra bookingportalen, hentet ' + esc(AVAIL.fetched) + ".</strong> " + esc(AVAIL.area) + ", " + AVAIL.guests + " gjester, fredag til søndag (2 netter). Bare hytter med plass til alle fem er med. Ledighet endres hele tiden, så sjekk i portalen før du bestiller.</p>" +
+      '<div class="row"><a class="btn small" href="' + portalUrl(w) + '" target="_blank" rel="noopener">Åpne denne helgen i portalen</a></div></div>';
+    html += '<div class="weeks" role="group" aria-label="Helg">' + liveWeeks().map(function (x, i) {
+      var d1 = parse(x.from), d2 = parse(x.to);
+      var label = d1.getDate() + ".–" + d2.getDate() + ". " + d2.toLocaleDateString("nb-NO", { month: "short" }).replace(".", "");
+      return '<button class="week" type="button" data-week="' + i + '" aria-pressed="' + (i === state.week ? "true" : "false") + '"><span class="wd">' + esc(label) + '</span><span class="wn">' + x.rows.length + " hytter</span></button>";
+    }).join("") + "</div>";
+
+    var all = liveWeeks()[0].rows.map(function (r) { return r.id; }).filter(function (id) {
+      return liveWeeks().every(function (x) { return x.rows.some(function (r) { return r.id === id; }); });
+    });
+    if (all.length) html += '<div class="always"><strong>Ledig alle ' + liveWeeks().length + " helgene:</strong> " + all.map(function (id) { return esc((byId[id] || {}).name || id); }).join(", ") + ".</div>";
+
+    var rows = w.rows.slice().sort(function (a, b) { return a.price - b.price || (a.name < b.name ? -1 : 1); });
+    html += '<div class="summary"><strong style="color:var(--ink)">' + rows.length + " hytter har plass</strong> " + esc(fmtDate(w.from)) + " til " + esc(fmtDate(w.to)) + ". Sortert etter pris.</div>";
+    html += '<div class="cards">' + rows.map(function (r) {
+      var beds = r.total ? r.free + " av " + r.total + " senger ledige" : "Hele hytta kan bookes";
+      return '<article class="card"><div class="avrow"><h3>' + esc(r.name) + '</h3><span class="price">fra ' + kr(r.price) + "</span></div>" +
+        '<div class="meta"><span class="pill ' + (r.total && r.free < AVAIL.guests + 2 ? "unknown" : "open") + '">' + esc(beds) + "</span><span>" + esc(AVAIL.area) + "</span></div>" +
+        '<div class="row actions"><button class="btn small" type="button" data-addweek="' + r.id + '">Legg til i tur</button>' +
+        '<a class="btn small ghost" href="' + portalUrl(w) + '" target="_blank" rel="noopener">Book i portalen</a></div></article>';
+    }).join("") + "</div>" +
+      '<p class="src">Prisen er portalens laveste pris for opphold og gjestetall som er valgt. Hytter som ikke står her har ikke plass til fem på denne helgen, eller kan ikke bookes i portalen. Langøyene svarte ikke i portalen og er ikke vurdert.</p>';
+    return html;
+  }
+
+  /* ---------- Mine opphold ---------- */
+  function stopProblems(s) {
+    var c = byId[s.cabinId]; if (!c) return [];
+    var out = [], closedOn = null, unknownOn = null;
+    for (var i = 0; i < Math.max(1, s.nights); i++) {
+      var d = addDays(s.date, i), st = statusFor(c, d);
+      if (st.kind === "closed" && !closedOn) closedOn = { d: d, st: st };
+      if (st.kind === "unknown" && !unknownOn) unknownOn = d;
+    }
+    if (s.status !== "Avbestilt") {
+      if (closedOn) out.push({ k: "bad", t: "Stengt " + fmtDate(closedOn.d) + ": " + closedOn.st.label + "." });
+      else if (unknownOn) out.push({ k: "warn", t: "Åpningstid for " + fmtDate(unknownOn) + " er ikke bekreftet. Sjekk UT.no." });
+      var days = diffDays(s.date, TODAY);
+      if (s.status === "Planlagt" && days >= 0 && days <= 14) out.push({ k: "warn", t: days === 0 ? "Ankomst i dag og ikke booket." : "Ikke booket, ankomst om " + days + (days === 1 ? " dag." : " dager.") });
+      if (s.status === "Bestilt" && days >= 0 && days <= 7) out.push({ k: "info", t: "Bestilt men ikke betalt. Sjekk at betalingen er gjennomført." });
+      if (c.book !== true && s.status === "Planlagt") out.push({ k: "info", t: "Det er ikke bekreftet at denne hytta kan bookes i portalen. Se UT.no." });
+    }
+    return out;
+  }
+
+  function sortedStops() { return state.stops.slice().sort(function (a, b) { return a.date < b.date ? -1 : a.date > b.date ? 1 : 0; }); }
+
+  function renderOpphold() {
+    var f = state.form;
+    var trips = {}; state.stops.forEach(function (s) { trips[s.trip || "Min tur"] = 1; });
+    var html = "";
+    if (state.loadErr) html += '<div class="notice warn"><p>' + esc(state.loadErr) + "</p></div>";
+    if (!state.stored) html += '<div class="notice warn"><p>Nettleseren tillater ikke lagring. Oppholdene du legger inn forsvinner når du lukker siden.</p></div>';
+
+    var todo = state.stops.filter(function (s) { return s.status === "Planlagt" && s.date >= TODAY; }).sort(function (a, b) { return a.date < b.date ? -1 : 1; });
+    if (todo.length) {
+      var first = todo[0], fc = byId[first.cabinId];
+      html += '<div class="notice warn"><p><strong>' + todo.length + (todo.length === 1 ? " opphold mangler booking." : " opphold mangler booking.") + "</strong> Først ut er " + esc(fc ? fc.name : "hytta") + " " + esc(fmtDate(first.date)) + ". Du booker én hytte om gangen og betaler før du går videre til neste.</p>" +
+        '<div class="row"><a class="btn small" href="' + BOOKING_URL + '" target="_blank" rel="noopener">Åpne bookingportalen</a><button class="btn small ghost" type="button" data-copy="all">Kopier liste over det som mangler</button></div></div>';
+    }
+
+    html += '<form class="formcard" id="addForm"><h2>Legg til opphold</h2><div class="grid">' +
+      '<div class="field wide"><label for="f-cabin">Hytte</label><select id="f-cabin" required><option value="">Velg hytte</option>' + CABINS.map(function (c) { return '<option value="' + c.id + '"' + (f.cabin === c.id ? " selected" : "") + ">" + esc(c.name) + "</option>"; }).join("") + "</select></div>" +
+      '<div class="field"><label for="f-trip">Tur</label><input type="text" id="f-trip" list="tripList" value="' + esc(f.trip) + '"><datalist id="tripList">' + Object.keys(trips).map(function (t) { return '<option value="' + esc(t) + '">'; }).join("") + "</datalist></div>" +
+      '<div class="field"><label for="f-date">Ankomst</label><input type="date" id="f-date" value="' + esc(f.date) + '" min="' + TODAY + '" required></div>' +
+      '<div class="field"><label for="f-nights">Netter</label><input type="number" id="f-nights" min="1" max="30" value="' + esc(f.nights) + '"></div>' +
+      '<div class="field"><label for="f-guests">Gjester</label><input type="number" id="f-guests" min="1" max="40" value="' + esc(f.guests) + '"></div>' +
+      '<div class="field"><button class="btn" type="submit">Legg til</button></div></div></form>';
+
+    if (!state.stops.some(function (s) { return addDays(s.date, s.nights) > TODAY; })) {
+      html += '<div class="empty"><h2>Ingen kommende opphold</h2><p>Legg til hyttene på turen din, så ser du om noen er stengt på datoene, hvor det er hull i turen og hva som ikke er booket.</p><button class="btn" type="button" data-example="1">Legg inn en eksempeltur</button></div>';
+      return html;
+    }
+
+    var groups = {}; sortedStops().filter(function (s) { return addDays(s.date, s.nights) > TODAY; }).forEach(function (s) { var t = s.trip || "Min tur"; (groups[t] = groups[t] || []).push(s); });
+    Object.keys(groups).forEach(function (t) {
+      var arr = groups[t], active = arr.filter(function (s) { return s.status !== "Avbestilt"; });
+      var booked = active.filter(function (s) { return s.status === "Bestilt" || s.status === "Betalt"; }).length;
+      html += '<div class="tripblock"><div class="triphead"><h2>' + esc(t) + '</h2><span class="approx">' + booked + " av " + active.length + " booket</span></div>";
+      var prev = null;
+      arr.forEach(function (s) {
+        var c = byId[s.cabinId] || { name: "Ukjent hytte" };
+        if (prev && s.status !== "Avbestilt" && prev.status !== "Avbestilt") {
+          var end = addDays(prev.date, prev.nights), g = diffDays(s.date, end);
+          if (g > 0) html += '<div class="gap">' + g + (g === 1 ? " natt" : " netter") + " uten hytte mellom " + esc((byId[prev.cabinId] || {}).name || "forrige hytte") + " og " + esc(c.name) + ".</div>";
+          if (g < 0) html += '<div class="gap">Oppholdene overlapper med ' + Math.abs(g) + (Math.abs(g) === 1 ? " natt." : " netter.") + "</div>";
+        }
+        if (s.status !== "Avbestilt") prev = s;
+        var probs = stopProblems(s), past = addDays(s.date, s.nights) <= TODAY;
+        var d = parse(s.date);
+        html += '<article class="stop' + (past || s.status === "Avbestilt" ? " done" : "") + '"><div class="datecol"><div class="d">' + d.getDate() + '</div><div class="m">' + d.toLocaleDateString("nb-NO", { month: "short" }).replace(".", "") + '</div><div class="n">' + s.nights + (s.nights === 1 ? " natt" : " netter") + '</div></div>' +
+          '<div class="stopbody"><h3>' + esc(c.name) + '</h3><div class="meta"><span>' + esc(fmtDate(s.date, d.getFullYear() !== new Date().getFullYear())) + "</span><span>" + s.guests + (s.guests === 1 ? " gjest" : " gjester") + "</span></div>" +
+          probs.map(function (p) { return '<div class="flag ' + p.k + '">' + esc(p.t) + "</div>"; }).join("") +
+          '<div class="stoprow"><label class="approx" for="st-' + s.id + '">Status</label><select id="st-' + s.id + '" data-status="' + s.id + '">' + STATUSES.map(function (x) { return '<option' + (x === s.status ? " selected" : "") + ">" + x + "</option>"; }).join("") + "</select>" +
+          '<input type="text" id="nt-' + s.id + '" data-note="' + s.id + '" placeholder="Notat, for eksempel bestillingsnummer" aria-label="Notat" value="' + esc(s.note || "") + '"></div>' +
+          '<div class="stoprow">' + (s.status === "Planlagt" ? '<a class="btn small" href="' + BOOKING_URL + '" target="_blank" rel="noopener">Book i portalen</a>' : "") + (byId[s.cabinId] && byId[s.cabinId].url ? '<a class="btn small ghost" href="' + byId[s.cabinId].url + '" target="_blank" rel="noopener">UT.no</a>' : "") + '<button class="btn small danger" type="button" data-del="' + s.id + '">Fjern</button></div></div></article>';
+      });
+      html += "</div>";
+    });
+    return html;
+  }
+
+  /* ---------- Guide ---------- */
+  function renderGuide() {
+    return '<section><h2>Slik booker du en DNT-hytte</h2><ol>' +
+      '<li>Gå til <a href="' + BOOKING_URL + '" target="_blank" rel="noopener">hyttebestilling.dnt.no</a>, velg språk og søk på hytte eller område. Legg inn dato og antall gjester, så får du hyttene som har plass.</li>' +
+      '<li>Du booker én hytte om gangen. Fullfør bestilling og betaling for den første før du går til neste. Over 530 hytter kan bookes online (tidlig 2026), men noen er ikke lagt inn ennå.</li>' +
+      '<li>Velg «Fullfør bestilling», logg inn med telefonnummer eller e-post og engangskode, og betal med kort.</li>' +
+      '<li>For å avbestille logger du inn i portalen, finner ordren og velger avbestill.</li></ol>' +
+      '<p class="src">Kilde: dnt.no, Hyttebestilling</p></section>' +
+      '<section><h2>Regler som ofte overrasker</h2><ul>' +
+      '<li><strong>Du må ikke booke.</strong> De fleste hytter holder av en del senger til gjester uten reservasjon. Booking anbefales likevel, og ved to døgn eller mer på betjent hytte er den lurt.</li>' +
+      '<li><strong>Kvelden på ankomstdagen.</strong> På flere hytter kan senga tildeles andre etter kl. 19.00, men bookingen er fortsatt gyldig. Sjekk vilkårene for hytta.</li>' +
+      '<li><strong>Avbestilling.</strong> På KNT-hytter som Innerdalshytta refunderes hele beløpet ved avbestilling senest 8 dager før ankomst. Andre foreninger kan ha andre vilkår.</li>' +
+      '<li><strong>Betaling på selv- og ubetjente hytter</strong> skjer i DNT-appen. Er overnattingen forhåndsbestilt, registrerer du bare proviant. Appen virker uten dekning.</li>' +
+      '<li><strong>DNT-nøkkel.</strong> Noen hytter er låst med nøkkel. Sjekk hytta på UT.no før du drar.</li>' +
+      '<li><strong>Villrein.</strong> DNT stenger hytter på Hardangervidda sør for Rv 7 og nord for E 134 i kalvingstiden, og fra 15. oktober til 28. februar hver vinter.</li>' +
+      '<li><strong>Åpningstider.</strong> Se alltid hytta på UT.no. Hytter kan være stengt av hensyn til rein og natur.</li></ul>' +
+      '<p class="src">Kilder: dnt.no, UT.no (Sandhaug, Litlos, Innerdalshytta, Kjeldebu)</p></section>';
+  }
+
+  /* ---------- tegning ---------- */
+  var panels = { hytter: document.getElementById("panel-hytter"), ledighet: document.getElementById("panel-ledighet"), opphold: document.getElementById("panel-opphold"), guide: document.getElementById("panel-guide") };
+  function render() {
+    var active = document.activeElement, activeId = active && active.id, selStart = active && active.selectionStart;
+    panels.hytter.innerHTML = state.tab === "hytter" ? renderHytter() : "";
+    panels.ledighet.innerHTML = state.tab === "ledighet" ? renderLedighet() : "";
+    panels.opphold.innerHTML = state.tab === "opphold" ? renderOpphold() : "";
+    panels.guide.innerHTML = state.tab === "guide" ? renderGuide() : "";
+    Object.keys(panels).forEach(function (k) { panels[k].hidden = k !== state.tab; });
+    document.querySelectorAll(".tab").forEach(function (b) { b.setAttribute("aria-selected", b.dataset.tab === state.tab ? "true" : "false"); });
+    var n = state.stops.filter(function (s) { return s.status !== "Avbestilt" && addDays(s.date, s.nights) > TODAY; }).length, cnt = document.getElementById("stopCount");
+    cnt.hidden = !n; cnt.textContent = n;
+    if (activeId === "q") { var q = document.getElementById("q"); if (q) { q.focus(); try { q.setSelectionRange(selStart, selStart); } catch (e) {} } }
+  }
+  function setTab(t) { state.tab = t; try { history.replaceState(null, "", "#" + t); } catch (e) { location.hash = t; } render(); window.scrollTo(0, 0); }
+
+  function missingText() {
+    return sortedStops().filter(function (s) { return s.status === "Planlagt" && s.date >= TODAY; }).map(function (s) {
+      var c = byId[s.cabinId] || { name: "Hytte" };
+      return c.name + ": " + fmtDate(s.date, true) + ", " + s.nights + (s.nights === 1 ? " natt" : " netter") + ", " + s.guests + (s.guests === 1 ? " gjest" : " gjester");
+    }).join("\n");
+  }
+
+  /* ---------- hendelser ---------- */
+  document.addEventListener("click", function (e) {
+    var t = e.target.closest("[data-tab],[data-chip],[data-add],[data-addweek],[data-week],[data-del],[data-copy],[data-example]"); if (!t) return;
+    if (t.dataset.week) { state.week = +t.dataset.week; return render(); }
+    if (t.dataset.addweek) { var wk = liveWeeks()[state.week]; state.form.cabin = t.dataset.addweek; state.form.date = wk.from; state.form.nights = 2; state.form.guests = AVAIL.guests; state.tab = "opphold"; render(); try { history.replaceState(null, "", "#opphold"); } catch (x) {} var fe = document.getElementById("addForm"); if (fe) fe.scrollIntoView({ block: "start" }); return; }
+    if (t.dataset.tab) return setTab(t.dataset.tab);
+    if (t.dataset.chip) {
+      var k = t.dataset.key, ty = t.dataset.chip;
+      if (ty === "area") state.areas[k] = !state.areas[k];
+      else if (ty === "kind") state.kinds[k] = !state.kinds[k];
+      else if (ty === "dog") state.dog = !state.dog;
+      else if (ty === "book") state.book = !state.book;
+      return render();
+    }
+    if (t.dataset.add) { state.form.cabin = t.dataset.add; state.form.date = state.date; state.tab = "opphold"; render(); try { history.replaceState(null, "", "#opphold"); } catch (x) {} var el = document.getElementById("addForm"); if (el) el.scrollIntoView({ block: "start" }); return; }
+    if (t.dataset.del) { state.stops = state.stops.filter(function (s) { return s.id !== t.dataset.del; }); remove(t.dataset.del); lsSyncLocal(); return render(); }
+    if (t.dataset.example) {
+      var base = TODAY < "2027-06-19" ? "2027-03-12" : addDays(TODAY, 30);
+      [["innerdalshytta", 0, 2], ["loennechenbua", 2, 1], ["aursjohytta", 3, 2]].forEach(function (x) {
+        var s = { id: uid(), cabinId: x[0], trip: "Eksempeltur Trollheimen", date: addDays(base, x[1]), nights: x[2], guests: 2, status: "Planlagt", note: "" };
+        state.stops.push(s); persist(s);
+      });
+      lsSyncLocal(); return render();
+    }
+    if (t.dataset.copy) {
+      var txt = missingText();
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(function () { t.textContent = "Kopiert"; }, function () { t.textContent = "Kunne ikke kopiere"; });
+      return;
+    }
+  });
+  function lsSyncLocal() { lsSet("hytte-stops", state.stops); }
+
+  document.addEventListener("input", function (e) {
+    var t = e.target;
+    if (t.id === "q") { state.q = t.value; return render(); }
+    if (t.id === "f-trip") state.form.trip = t.value;
+    if (t.id === "f-date") state.form.date = t.value;
+    if (t.id === "f-nights") state.form.nights = t.value;
+    if (t.id === "f-guests") state.form.guests = t.value;
+    if (t.id === "f-cabin") state.form.cabin = t.value;
+  });
+  document.addEventListener("change", function (e) {
+    var t = e.target;
+    if (t.id === "checkDate") { if (t.value) { state.date = t.value; render(); } return; }
+    if (t.dataset && t.dataset.status) {
+      var s = state.stops.filter(function (x) { return x.id === t.dataset.status; })[0];
+      if (s) { s.status = t.value; persist(s); lsSyncLocal(); render(); }
+    }
+    if (t.dataset && t.dataset.note) {
+      var n = state.stops.filter(function (x) { return x.id === t.dataset.note; })[0];
+      if (n) { n.note = t.value; persist(n); lsSyncLocal(); }
+    }
+  });
+  document.addEventListener("submit", function (e) {
+    if (e.target.id !== "addForm") return;
+    e.preventDefault();
+    var f = state.form;
+    if (!f.cabin || !f.date) return;
+    var s = { id: uid(), cabinId: f.cabin, trip: (f.trip || "Min tur").trim() || "Min tur", date: f.date, nights: Math.max(1, Math.min(30, parseInt(f.nights, 10) || 1)), guests: Math.max(1, Math.min(40, parseInt(f.guests, 10) || 1)), status: "Planlagt", note: "" };
+    state.stops.push(s); persist(s); lsSyncLocal();
+    state.form = { cabin: "", trip: s.trip, date: addDays(s.date, s.nights), nights: 1, guests: s.guests };
+    render();
+  });
+
+  /* ---------- oppstart ---------- */
+  var dateInput = document.getElementById("checkDate"); dateInput.value = TODAY; dateInput.min = TODAY;
+  dateInput.addEventListener("change", function () { if (dateInput.value) { state.date = dateInput.value; render(); } });
+  var h = (location.hash || "").replace("#", ""); if (panels[h]) state.tab = h;
+  window.addEventListener("hashchange", function () { var x = (location.hash || "").replace("#", ""); if (panels[x] && x !== state.tab) { state.tab = x; render(); } });
+  render();
+
+  /* Lagring i nettleseren, og ledighet fra data/ledighet.json (oppdateres av egen jobb). */
+  try { localStorage.setItem("hytte-test", "1"); localStorage.removeItem("hytte-test"); state.stored = true; } catch (e) { state.stored = false; }
+  if (state.stored) state.stops = lsGet("hytte-stops", []).filter(function (x) { return x && x.cabinId; });
+  render();
+  try {
+    fetch("data/ledighet.json", { cache: "no-store" }).then(function (r) { return r.ok ? r.json() : null; }).then(function (j) { if (j && j.weeks && j.weeks.length) { AVAIL = j; render(); } }).catch(function () {});
+  } catch (e) {}
+})();
+</script>
+</body>
+</html>
