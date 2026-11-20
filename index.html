@@ -402,7 +402,7 @@ footer { margin-top: 28px; font-size: 12.5px; color: var(--ink-2); border-top: 1
     html += '<div class="summary"><strong style="color:var(--ink)">' + rows.length + " hytter har plass</strong> " + esc(fmtDate(w.from)) + " til " + esc(fmtDate(w.to)) + ". Sortert etter pris.</div>";
     html += '<div class="cards">' + rows.map(function (r) {
       var beds = r.total ? r.free + " av " + r.total + " senger ledige" : "Hele hytta kan bookes";
-      return '<article class="card"><div class="avrow"><h3>' + esc(r.name) + '</h3>(r.price ? '<span class="price">fra ' + kr(r.price) + "</span>" : "") + "</div>" +
+      return '<article class="card"><div class="avrow"><h3>' + esc(r.name) + '</h3>' + (r.price ? '<span class="price">fra ' + kr(r.price) + "</span>" : "") + "</div>" +
         '<div class="meta"><span class="pill ' + (r.total && r.free <= 2 ? "unknown" : "open") + '">' + esc(beds) + "</span><span>" + esc(r.area || AVAIL.area || "") + "</span></div>" +
         '<div class="row actions"><button class="btn small" type="button" data-addweek="' + r.id + '">Legg til i tur</button>' +
         '<a class="btn small ghost" href="' + portalUrl(w, r) + '" target="_blank" rel="noopener">Book i portalen</a></div></article>';
