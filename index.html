@@ -319,7 +319,7 @@ footer { margin-top: 28px; font-size: 12.5px; color: var(--ink-2); border-top: 1
   }
 
   /* ---------- tilstand ---------- */
-  var state = { tab: "hytter", week: 0, date: TODAY, q: "", areas: {}, kinds: {}, dog: false, book: false, stops: [], form: { cabin: "", trip: "Min tur", date: TODAY, nights: 1, guests: 2 }, stored: false, loadErr: "" };
+  var state = { ledArea: "", tab: "hytter", week: 0, date: TODAY, q: "", areas: {}, kinds: {}, dog: false, book: false, stops: [], form: { cabin: "", trip: "Min tur", date: TODAY, nights: 1, guests: 2 }, stored: false, loadErr: "" };
   var col = null;
 
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (ch) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch]; }); }
@@ -376,14 +376,14 @@ footer { margin-top: 28px; font-size: 12.5px; color: var(--ink-2); border-top: 1
 
 
   /* ---------- Ledighet ---------- */
-  function portalUrl(w) { return BOOKING_URL + "kart?value=" + AVAIL.areaId + "&type=area&fromDate=" + w.from + "&toDate=" + w.to + "&numberOfGuests=" + AVAIL.guests + "&adults=" + AVAIL.guests; }
+  function portalUrl(w, r) { var g = AVAIL.guests || 1, a = (r && r.areaId) || AVAIL.areaId; return a ? BOOKING_URL + "kart?value=" + a + "&type=area&fromDate=" + w.from + "&toDate=" + w.to + "&numberOfGuests=" + g + "&adults=" + g : BOOKING_URL; }
   function kr(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, " ") + ",-"; }
   function liveWeeks() { return AVAIL.weeks.filter(function (x) { return x.to >= TODAY; }); }
   function renderLedighet() {
     if (!AVAIL) return '<div class="empty"><h2>Ledighet er ikke lastet</h2><p>Fant ikke data/ledighet.json. Last siden på nytt, eller åpne bookingportalen direkte.</p><a class="btn" href="' + BOOKING_URL + '" target="_blank" rel="noopener">Åpne bookingportalen</a></div>';
     if (!liveWeeks().length) return '<div class="empty"><h2>Ingen kommende helger</h2><p>Alle helgene i øyeblikksbildet er passert. Åpne bookingportalen for oppdatert ledighet.</p><a class="btn" href="' + BOOKING_URL + '" target="_blank" rel="noopener">Åpne bookingportalen</a></div>';
     var w = liveWeeks()[state.week] || liveWeeks()[0];
-    var html = '<div class="notice"><p><strong>Øyeblikksbilde fra bookingportalen, hentet ' + esc(AVAIL.fetched) + ".</strong> " + esc(AVAIL.area) + ", " + AVAIL.guests + " gjester, fredag til søndag (2 netter). Bare hytter med plass til alle fem er med. Ledighet endres hele tiden, så sjekk i portalen før du bestiller.</p>" +
+    var html = '<div class="notice"><p><strong>Øyeblikksbilde fra bookingportalen, hentet ' + esc(AVAIL.fetched) + ".</strong> " + esc(AVAIL.omrader ? AVAIL.omrader.join(", ") : AVAIL.area) + ", fredag til søndag (2 netter). " + (AVAIL.guests ? "Bare hytter med plass til " + AVAIL.guests + " gjester er med. " : "Viser ledige senger totalt, uavhengig av gjestetall. ") + "Ledighet endres hele tiden, så sjekk i portalen før du bestiller.</p>" +
       '<div class="row"><a class="btn small" href="' + portalUrl(w) + '" target="_blank" rel="noopener">Åpne denne helgen i portalen</a></div></div>';
     html += '<div class="weeks" role="group" aria-label="Helg">' + liveWeeks().map(function (x, i) {
       var d1 = parse(x.from), d2 = parse(x.to);
@@ -396,16 +396,18 @@ footer { margin-top: 28px; font-size: 12.5px; color: var(--ink-2); border-top: 1
     });
     if (all.length) html += '<div class="always"><strong>Ledig alle ' + liveWeeks().length + " helgene:</strong> " + all.map(function (id) { return esc((byId[id] || {}).name || id); }).join(", ") + ".</div>";
 
-    var rows = w.rows.slice().sort(function (a, b) { return a.price - b.price || (a.name < b.name ? -1 : 1); });
+    var areas = []; w.rows.forEach(function (r) { if (r.area && areas.indexOf(r.area) < 0) areas.push(r.area); });
+    if (areas.length > 1) html += '<div class="chips" role="group" aria-label="Område">' + [""].concat(areas.sort()).map(function (a) { return '<button class="chip" type="button" data-ledarea="' + esc(a) + '" aria-pressed="' + ((state.ledArea || "") === a ? "true" : "false") + '">' + esc(a || "Alle områder") + "</button>"; }).join("") + "</div>";
+    var rows = w.rows.filter(function (r) { return !state.ledArea || r.area === state.ledArea; }).sort(function (a, b) { return (a.price || 1e9) - (b.price || 1e9) || (a.name < b.name ? -1 : 1); });
     html += '<div class="summary"><strong style="color:var(--ink)">' + rows.length + " hytter har plass</strong> " + esc(fmtDate(w.from)) + " til " + esc(fmtDate(w.to)) + ". Sortert etter pris.</div>";
     html += '<div class="cards">' + rows.map(function (r) {
       var beds = r.total ? r.free + " av " + r.total + " senger ledige" : "Hele hytta kan bookes";
-      return '<article class="card"><div class="avrow"><h3>' + esc(r.name) + '</h3><span class="price">fra ' + kr(r.price) + "</span></div>" +
-        '<div class="meta"><span class="pill ' + (r.total && r.free < AVAIL.guests + 2 ? "unknown" : "open") + '">' + esc(beds) + "</span><span>" + esc(AVAIL.area) + "</span></div>" +
+      return '<article class="card"><div class="avrow"><h3>' + esc(r.name) + '</h3>(r.price ? '<span class="price">fra ' + kr(r.price) + "</span>" : "") + "</div>" +
+        '<div class="meta"><span class="pill ' + (r.total && r.free <= 2 ? "unknown" : "open") + '">' + esc(beds) + "</span><span>" + esc(r.area || AVAIL.area || "") + "</span></div>" +
         '<div class="row actions"><button class="btn small" type="button" data-addweek="' + r.id + '">Legg til i tur</button>' +
-        '<a class="btn small ghost" href="' + portalUrl(w) + '" target="_blank" rel="noopener">Book i portalen</a></div></article>';
+        '<a class="btn small ghost" href="' + portalUrl(w, r) + '" target="_blank" rel="noopener">Book i portalen</a></div></article>';
     }).join("") + "</div>" +
-      '<p class="src">Prisen er portalens laveste pris for opphold og gjestetall som er valgt. Hytter som ikke står her har ikke plass til fem på denne helgen, eller kan ikke bookes i portalen. Langøyene svarte ikke i portalen og er ikke vurdert.</p>';
+      '<p class="src">Prisen er portalens laveste pris for oppholdet. Hytter som ikke står her har ingen ledige senger denne helgen, eller kan ikke bookes i portalen.</p>';
     return html;
   }
 
@@ -530,9 +532,10 @@ footer { margin-top: 28px; font-size: 12.5px; color: var(--ink-2); border-top: 1
 
   /* ---------- hendelser ---------- */
   document.addEventListener("click", function (e) {
-    var t = e.target.closest("[data-tab],[data-chip],[data-add],[data-addweek],[data-week],[data-del],[data-copy],[data-example]"); if (!t) return;
+    var t = e.target.closest("[data-ledarea],[data-tab],[data-chip],[data-add],[data-addweek],[data-week],[data-del],[data-copy],[data-example]"); if (!t) return;
+    if ("ledarea" in t.dataset) { state.ledArea = t.dataset.ledarea; return render(); }
     if (t.dataset.week) { state.week = +t.dataset.week; return render(); }
-    if (t.dataset.addweek) { var wk = liveWeeks()[state.week]; state.form.cabin = t.dataset.addweek; state.form.date = wk.from; state.form.nights = 2; state.form.guests = AVAIL.guests; state.tab = "opphold"; render(); try { history.replaceState(null, "", "#opphold"); } catch (x) {} var fe = document.getElementById("addForm"); if (fe) fe.scrollIntoView({ block: "start" }); return; }
+    if (t.dataset.addweek) { var wk = liveWeeks()[state.week]; state.form.cabin = t.dataset.addweek; state.form.date = wk.from; state.form.nights = 2; state.form.guests = AVAIL.guests || 2; state.tab = "opphold"; render(); try { history.replaceState(null, "", "#opphold"); } catch (x) {} var fe = document.getElementById("addForm"); if (fe) fe.scrollIntoView({ block: "start" }); return; }
     if (t.dataset.tab) return setTab(t.dataset.tab);
     if (t.dataset.chip) {
       var k = t.dataset.key, ty = t.dataset.chip;
