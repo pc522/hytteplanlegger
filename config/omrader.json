@@ -1,0 +1,7 @@
+{
+  "fylker": ["Oslo", "Akershus", "Østfold", "Buskerud", "Vestfold", "Telemark", "Innlandet"],
+  "omradeRegex": "hardangervidda|hallingskarv",
+  "navnRegex": "finse",
+  "antallHelger": 8,
+  "beskrivelse": ["Oslo", "Akershus", "Østfold", "Buskerud", "Vestfold", "Telemark", "Innlandet", "Hardangervidda og Finse"]
+}

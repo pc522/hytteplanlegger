@@ -1,0 +1,34 @@
+name: Oppdater ledighet
+on:
+  schedule:
+    - cron: '17 5 * * *'   # ca. 07.17 norsk sommertid, 06.17 vintertid
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: ledighet
+  cancel-in-progress: false
+jobs:
+  hent:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Installer Playwright
+        run: |
+          npm init -y >/dev/null
+          npm install playwright@1.49.1
+          npx playwright install --with-deps chromium
+      - name: Hent ledighet
+        run: node scripts/hent-ledighet.mjs
+      - name: Commit hvis filen er endret
+        run: |
+          if git diff --quiet -- data/ledighet.json; then echo "Ingen endring"; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/ledighet.json
+          git commit -m "Oppdater ledighet"
+          git push

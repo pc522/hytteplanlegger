@@ -33,3 +33,12 @@ Oversikt over DNT-hytter, åpningstider og ledighet, med en enkel turplanlegger.
 - `areaId` er områdets id i portalens kart-URL (`/kart?value=<id>&type=area`).
 - `id` er en kort slug av navnet. Oslomarka-hytter har prefikset `om-`. Gjenbruk id-ene som allerede finnes i filen.
 - Det finnes ingen gjestetall. Ledigheten gjelder totalt antall senger.
+
+
+## Automatisk oppdatering (GitHub Actions)
+
+`.github/workflows/ledighet.yml` kjører hver morgen (ca. 07.17 norsk tid) og kan startes manuelt under **Actions → Oppdater ledighet → Run workflow**.
+Jobben kjører `scripts/hent-ledighet.mjs`, som henter ledighet for fredag–søndag de neste 8 helgene for alle hytter i fylkene i `config/omrader.json` (pluss Hardangervidda og Finse), og committer `data/ledighet.json`.
+Feiler for mange kall, eller finner den ingen ledighet, skrives ingenting, og forrige fil blir stående.
+
+Hver rad har nå også `county` (fylke), og `price` er laveste voksenpris per person (ikke medlem) fra portalen, eller `null`.

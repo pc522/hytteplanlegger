@@ -319,6 +319,19 @@ footer { margin-top: 28px; font-size: 12.5px; color: var(--ink-2); border-top: 1
   }
 
   /* ---------- tilstand ---------- */
+
+  /* Kobler rader fra Actions-jobben til hyttene i CABINS (på navn). Ukjente hytter legges til som enkle hytter uten åpningstider. */
+  var EXTRA = [];
+  function nn(x) { return String(x || "").toLowerCase().replace(/[^a-zæøå0-9]/g, ""); }
+  function addExtra(id, name, area) { if (byId[id]) return; var c = { id: id, name: name, area: area || "", rules: [], def: null, kind: "", extra: true }; byId[id] = c; EXTRA.push(c); }
+  function normAvail(j) {
+    var byName = {}; CABINS.forEach(function (c) { byName[nn(c.name)] = c.id; });
+    j.weeks.forEach(function (w) { w.rows.forEach(function (r) {
+      var hit = byName[nn(r.name)]; if (hit) r.id = hit; else addExtra(r.id, r.name, r.area);
+    }); });
+    state.stops.forEach(function (s) { if (!byId[s.cabinId] && s.cabinName) addExtra(s.cabinId, s.cabinName, ""); });
+    return j;
+  }
   var state = { ledArea: "", tab: "hytter", week: 0, date: TODAY, q: "", areas: {}, kinds: {}, dog: false, book: false, stops: [], form: { cabin: "", trip: "Min tur", date: TODAY, nights: 1, guests: 2 }, stored: false, loadErr: "" };
   var col = null;
 
@@ -396,9 +409,9 @@ footer { margin-top: 28px; font-size: 12.5px; color: var(--ink-2); border-top: 1
     });
     if (all.length) html += '<div class="always"><strong>Ledig alle ' + liveWeeks().length + " helgene:</strong> " + all.map(function (id) { return esc((byId[id] || {}).name || id); }).join(", ") + ".</div>";
 
-    var areas = []; w.rows.forEach(function (r) { if (r.area && areas.indexOf(r.area) < 0) areas.push(r.area); });
-    if (areas.length > 1) html += '<div class="chips" role="group" aria-label="Område">' + [""].concat(areas.sort()).map(function (a) { return '<button class="chip" type="button" data-ledarea="' + esc(a) + '" aria-pressed="' + ((state.ledArea || "") === a ? "true" : "false") + '">' + esc(a || "Alle områder") + "</button>"; }).join("") + "</div>";
-    var rows = w.rows.filter(function (r) { return !state.ledArea || r.area === state.ledArea; }).sort(function (a, b) { return (a.price || 1e9) - (b.price || 1e9) || (a.name < b.name ? -1 : 1); });
+    var areas = []; w.rows.forEach(function (r) { if ((r.county || r.area) && areas.indexOf(r.county || r.area) < 0) areas.push(r.county || r.area); });
+    if (areas.length > 1) html += '<div class="chips" role="group" aria-label="Område">' + [""].concat(areas.sort()).map(function (a) { return '<button class="chip" type="button" data-ledarea="' + esc(a) + '" aria-pressed="' + ((state.ledArea || "") === a ? "true" : "false") + '">' + esc(a || "Alle fylker") + "</button>"; }).join("") + "</div>";
+    var rows = w.rows.filter(function (r) { return !state.ledArea || (r.county || r.area) === state.ledArea; }).sort(function (a, b) { return (a.price || 1e9) - (b.price || 1e9) || (a.name < b.name ? -1 : 1); });
     html += '<div class="summary"><strong style="color:var(--ink)">' + rows.length + " hytter har plass</strong> " + esc(fmtDate(w.from)) + " til " + esc(fmtDate(w.to)) + ". Sortert etter pris.</div>";
     html += '<div class="cards">' + rows.map(function (r) {
       var beds = r.total ? r.free + " av " + r.total + " senger ledige" : "Hele hytta kan bookes";
@@ -407,7 +420,7 @@ footer { margin-top: 28px; font-size: 12.5px; color: var(--ink-2); border-top: 1
         '<div class="row actions"><button class="btn small" type="button" data-addweek="' + r.id + '">Legg til i tur</button>' +
         '<a class="btn small ghost" href="' + portalUrl(w, r) + '" target="_blank" rel="noopener">Book i portalen</a></div></article>';
     }).join("") + "</div>" +
-      '<p class="src">Prisen er portalens laveste pris for oppholdet. Hytter som ikke står her har ingen ledige senger denne helgen, eller kan ikke bookes i portalen.</p>';
+      '<p class="src">Prisen er portalens laveste voksenpris per person og kan variere med medlemskap og tilbud. Hytter som ikke står her har ingen ledige senger denne helgen, eller kan ikke bookes i portalen.</p>';
     return html;
   }
 
@@ -448,7 +461,7 @@ footer { margin-top: 28px; font-size: 12.5px; color: var(--ink-2); border-top: 1
     }
 
     html += '<form class="formcard" id="addForm"><h2>Legg til opphold</h2><div class="grid">' +
-      '<div class="field wide"><label for="f-cabin">Hytte</label><select id="f-cabin" required><option value="">Velg hytte</option>' + CABINS.map(function (c) { return '<option value="' + c.id + '"' + (f.cabin === c.id ? " selected" : "") + ">" + esc(c.name) + "</option>"; }).join("") + "</select></div>" +
+      '<div class="field wide"><label for="f-cabin">Hytte</label><select id="f-cabin" required><option value="">Velg hytte</option>' + CABINS.concat(EXTRA).map(function (c) { return '<option value="' + c.id + '"' + (f.cabin === c.id ? " selected" : "") + ">" + esc(c.name) + "</option>"; }).join("") + "</select></div>" +
       '<div class="field"><label for="f-trip">Tur</label><input type="text" id="f-trip" list="tripList" value="' + esc(f.trip) + '"><datalist id="tripList">' + Object.keys(trips).map(function (t) { return '<option value="' + esc(t) + '">'; }).join("") + "</datalist></div>" +
       '<div class="field"><label for="f-date">Ankomst</label><input type="date" id="f-date" value="' + esc(f.date) + '" min="' + TODAY + '" required></div>' +
       '<div class="field"><label for="f-nights">Netter</label><input type="number" id="f-nights" min="1" max="30" value="' + esc(f.nights) + '"></div>' +
@@ -589,7 +602,7 @@ footer { margin-top: 28px; font-size: 12.5px; color: var(--ink-2); border-top: 1
     e.preventDefault();
     var f = state.form;
     if (!f.cabin || !f.date) return;
-    var s = { id: uid(), cabinId: f.cabin, trip: (f.trip || "Min tur").trim() || "Min tur", date: f.date, nights: Math.max(1, Math.min(30, parseInt(f.nights, 10) || 1)), guests: Math.max(1, Math.min(40, parseInt(f.guests, 10) || 1)), status: "Planlagt", note: "" };
+    var s = { id: uid(), cabinId: f.cabin, cabinName: (byId[f.cabin] || {}).extra ? byId[f.cabin].name : undefined, trip: (f.trip || "Min tur").trim() || "Min tur", date: f.date, nights: Math.max(1, Math.min(30, parseInt(f.nights, 10) || 1)), guests: Math.max(1, Math.min(40, parseInt(f.guests, 10) || 1)), status: "Planlagt", note: "" };
     state.stops.push(s); persist(s); lsSyncLocal();
     state.form = { cabin: "", trip: s.trip, date: addDays(s.date, s.nights), nights: 1, guests: s.guests };
     render();
@@ -607,7 +620,7 @@ footer { margin-top: 28px; font-size: 12.5px; color: var(--ink-2); border-top: 1
   if (state.stored) state.stops = lsGet("hytte-stops", []).filter(function (x) { return x && x.cabinId; });
   render();
   try {
-    fetch("data/ledighet.json", { cache: "no-store" }).then(function (r) { return r.ok ? r.json() : null; }).then(function (j) { if (j && j.weeks && j.weeks.length) { AVAIL = j; render(); } }).catch(function () {});
+    fetch("data/ledighet.json", { cache: "no-store" }).then(function (r) { return r.ok ? r.json() : null; }).then(function (j) { if (j && j.weeks && j.weeks.length) { AVAIL = normAvail(j); render(); } }).catch(function () {});
   } catch (e) {}
 })();
 </script>
