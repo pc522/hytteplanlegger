@@ -100,16 +100,20 @@ console.log(`${alle.length} hytter i portalen, ${valgte.length} valgt.`);
 
 const ukene = helger(cfg.antallHelger);
 const uker = []; let kall = 0, feil = 0;
+const ikkeBookbare = new Set();
+let forsteUke = true;
 for (const uke of ukene) {
+  const aktive = valgte.filter((h) => !ikkeBookbare.has(h.id));
   const svar = await side.evaluate(async ({ hytter, fra, til }) => {
     const sov = (ms) => new Promise((res) => setTimeout(res, ms));
     const status = {};
     async function hent(h) {
-      for (let forsok = 0; forsok < 6; forsok++) {
+      for (let forsok = 0; forsok < 3; forsok++) {
         try {
           const r = await fetch(`/api/booking/cabin-availability?cabinId=${h.id}&fromDate=${fra}&toDate=${til}`);
           status[r.status] = (status[r.status] || 0) + 1;
           if (r.ok) return { id: h.id, ok: true, data: (await r.json()).data || null };
+          if (r.status === 404) break;
           const ventSek = Number(r.headers.get('retry-after'));
           await sov(ventSek > 0 ? Math.min(ventSek, 30) * 1000 : 1000 * 2 ** forsok);
         } catch (e) { status.nettfeil = (status.nettfeil || 0) + 1; await sov(1000 * 2 ** forsok); }
@@ -120,10 +124,19 @@ for (const uke of ukene) {
     async function jobb() { while (neste < hytter.length) { const h = hytter[neste++]; ut.push(await hent(h)); await sov(150); } }
     await Promise.all(Array.from({ length: 3 }, jobb));
     return { ut, status };
-  }, { hytter: valgte, fra: uke.from, til: uke.to });
+  }, { hytter: aktive, fra: uke.from, til: uke.to });
   console.log(`  statuskoder: ${JSON.stringify(svar.status)}`);
   const rader = [];
+  if (forsteUke) {
+    const ok = svar.ut.filter((x) => x.ok).length;
+    svar.ut.filter((x) => !x.ok).forEach((x) => ikkeBookbare.add(x.id));
+    console.log(`  første helg: ${ok} av ${aktive.length} hytter svarte, ${ikkeBookbare.size} hoppes over (ikke bookbare i portalen)`);
+    if (ok < aktive.length * 0.4) { console.error('For få hytter svarte i første helg. Avbryter uten å skrive fil.'); process.exit(1); }
+    svar.ut.forEach((x) => { if (!x.ok) x.hoppOver = true; });
+    forsteUke = false;
+  }
   for (const s of svar.ut) {
+    if (s.hoppOver) continue;
     kall++;
     if (!s.ok) { feil++; continue; }
     const rad = tilRad(valgte.find((h) => h.id === s.id), s.data);
