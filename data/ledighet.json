@@ -1,6 +1,6 @@
 {
- "fetched": "21. november 2026 kl. 19:52",
- "hentet": "2026-11-21T18:52:21.759Z",
+ "fetched": "21. november 2026 kl. 22:33",
+ "hentet": "2026-11-21T21:33:44.296Z",
  "omrader": [
   "Oslo",
   "Akershus",
@@ -12,6 +12,1737 @@
   "Hardangervidda og Finse"
  ],
  "kilde": "hyttebestilling.dnt.no",
+ "hytter": [
+  {
+   "id": "c10461",
+   "name": "Buvasskoia",
+   "area": "Holleia, Vikerfjell og Vassfaret",
+   "county": "Buskerud",
+   "bookbar": true
+  },
+  {
+   "id": "c10808",
+   "name": "Geiterygghytta",
+   "area": "Skarvheimen",
+   "county": "Buskerud",
+   "bookbar": false
+  },
+  {
+   "id": "c10710",
+   "name": "Blektjernstua",
+   "area": "Drammensmarka og Finnemarka",
+   "county": "Buskerud",
+   "bookbar": true
+  },
+  {
+   "id": "c10917",
+   "name": "Snøheim",
+   "area": "Dovrefjell",
+   "county": "Innlandet",
+   "bookbar": false
+  },
+  {
+   "id": "c101196",
+   "name": "Målia Stouslandhytta",
+   "area": "Hedmarken og Hedmarksvidda",
+   "county": "Innlandet",
+   "bookbar": true
+  },
+  {
+   "id": "c10246",
+   "name": "Kynndammen",
+   "area": "Finnskogen og omegn",
+   "county": "Innlandet",
+   "bookbar": true
+  },
+  {
+   "id": "c10915",
+   "name": "Torfinnsbu",
+   "area": "Jotunheimen",
+   "county": "Innlandet",
+   "bookbar": false
+  },
+  {
+   "id": "c10515",
+   "name": "Eriksbu",
+   "area": "Blefjell og Vegglifjell",
+   "county": "Buskerud",
+   "bookbar": true
+  },
+  {
+   "id": "c10880",
+   "name": "Mule Varde Turisthytte",
+   "area": "Grenland",
+   "county": "Telemark",
+   "bookbar": false
+  },
+  {
+   "id": "c101317791",
+   "name": "Pynten",
+   "area": "Oslofjorden",
+   "county": "Østfold",
+   "bookbar": true
+  },
+  {
+   "id": "c10668",
+   "name": "Knudsrød",
+   "area": "Oslofjorden",
+   "county": "Vestfold",
+   "bookbar": true
+  },
+  {
+   "id": "c10928",
+   "name": "Kljåen",
+   "area": "Skarvheimen",
+   "county": "Buskerud",
+   "bookbar": false
+  },
+  {
+   "id": "c10767",
+   "name": "Hadlaskard turisthytte",
+   "area": "Hardangervidda",
+   "county": "Vestland",
+   "bookbar": true
+  },
+  {
+   "id": "c101067",
+   "name": "Goliaten",
+   "area": "Drammensmarka og Finnemarka",
+   "county": "Buskerud",
+   "bookbar": true
+  },
+  {
+   "id": "c101317794",
+   "name": "Turisten",
+   "area": "Drammensmarka og Finnemarka",
+   "county": "Buskerud",
+   "bookbar": true
+  },
+  {
+   "id": "c10626",
+   "name": "Hengeltjørnhytta",
+   "area": "Austheiane",
+   "county": "Telemark",
+   "bookbar": true
+  },
+  {
+   "id": "c10669",
+   "name": "Grasbråtan",
+   "area": "Finnskogen og omegn",
+   "county": "Innlandet",
+   "bookbar": true
+  },
+  {
+   "id": "c101194",
+   "name": "Målia selvbetjent",
+   "area": "Hedmarken og Hedmarksvidda",
+   "county": "Innlandet",
+   "bookbar": true
+  },
+  {
+   "id": "c10711",
+   "name": "Helberghytta",
+   "area": "Hardangervidda",
+   "county": "Telemark",
+   "bookbar": false
+  },
+  {
+   "id": "c10242",
+   "name": "Helgedammen",
+   "area": "Finnskogen og omegn",
+   "county": "Innlandet",
+   "bookbar": true
+  },
+  {
+   "id": "c10558",
+   "name": "Sørmyrseter",
+   "area": "Skrim, Vindfjell",
+   "county": "Buskerud",
+   "bookbar": true
+  },
+  {
+   "id": "c10787",
+   "name": "Spikertjernhytta",
+   "area": "Oslomarka",
+   "county": "Akershus",
+   "bookbar": true
+  },
+  {
+   "id": "c10243",
+   "name": "Lebiko",
+   "area": "Finnskogen og omegn",
+   "county": "Innlandet",
+   "bookbar": true
+  },
+  {
+   "id": "c101138",
+   "name": "Heisetra",
+   "area": "Vestfoldmarka",
+   "county": "Vestfold",
+   "bookbar": true
+  },
+  {
+   "id": "c101200",
+   "name": "Skolla ubetjent hytte",
+   "area": "Hedmarken og Hedmarksvidda",
+   "county": "Innlandet",
+   "bookbar": true
+  },
+  {
+   "id": "c101201819",
+   "name": "Abborhøgda",
+   "area": "Finnskogen og omegn",
+   "county": "Innlandet",
+   "bookbar": true
+  },
+  {
+   "id": "c10745",
+   "name": "Rauhelleren",
+   "area": "Hardangervidda",
+   "county": "Buskerud",
+   "bookbar": false
+  },
+  {
+   "id": "c10341",
+   "name": "Jammerdalsbu",
+   "area": "Lillehammer-Rondane",
+   "county": "Innlandet",
+   "bookbar": true
+  },
+  {
+   "id": "c101274",
+   "name": "DNT Osbakken",
+   "area": "Gjøvik, Land og Toten",
+   "county": "Innlandet",
+   "bookbar": true
+  },
+  {
+   "id": "c10258893",
+   "name": "Fiskelaushytta",
+   "area": "Oslomarka",
+   "county": "Akershus",
+   "bookbar": true
+  },
+  {
+   "id": "c101226",
+   "name": "Svartvannshytta",
+   "area": "Oslomarka",
+   "county": "Akershus",
+   "bookbar": true
+  },
+  {
+   "id": "c101360",
+   "name": "Hovinkoia",
+   "area": "Holleia, Vikerfjell og Vassfaret",
+   "county": "Buskerud",
+   "bookbar": true
+  },
+  {
+   "id": "c10932",
+   "name": "Skridulaupbu",
+   "area": "Breheimen med Jostedalsbreen",
+   "county": "Innlandet",
+   "bookbar": false
+  },
+  {
+   "id": "c101148967",
+   "name": "Lerbergsetra",
+   "area": "Holleia, Vikerfjell og Vassfaret",
+   "county": "Buskerud",
+   "bookbar": true
+  },
+  {
+   "id": "c101308",
+   "name": "Savalsætra",
+   "area": "Hedmarken og Hedmarksvidda",
+   "county": "Innlandet",
+   "bookbar": true
+  },
+  {
+   "id": "c10646",
+   "name": "Middalsbu",
+   "area": "Hardangervidda",
+   "county": "Vestland",
+   "bookbar": false
+  },
+  {
+   "id": "c101064",
+   "name": "Krækkja",
+   "area": "Hardangervidda",
+   "county": "Buskerud",
+   "bookbar": false
+  },
+  {
+   "id": "c10709",
+   "name": "Veslekillingen",
+   "area": "Oslofjorden",
+   "county": "Vestfold",
+   "bookbar": true
+  },
+  {
+   "id": "c10380",
+   "name": "Granbustøyl",
+   "area": "Austheiane",
+   "county": "Telemark",
+   "bookbar": true
+  },
+  {
+   "id": "c101170964",
+   "name": "Spettehytta - Sæteren Gård",
+   "area": "Oslomarka",
+   "county": "Akershus",
+   "bookbar": true
+  },
+  {
+   "id": "c10826",
+   "name": "Snellingen",
+   "area": "Oslomarka",
+   "county": "Akershus",
+   "bookbar": true
+  },
+  {
+   "id": "c10370415",
+   "name": "Veslefjellbua",
+   "area": "Lillehammer-Rondane",
+   "county": "Innlandet",
+   "bookbar": true
+  },
+  {
+   "id": "c101039692",
+   "name": "Sjåførboligen på Elnestangen",
+   "area": "Oslofjorden",
+   "county": "Akershus",
+   "bookbar": true
+  },
+  {
+   "id": "c10831",
+   "name": "Ellefsplass",
+   "area": "Femundsmarka",
+   "county": "Innlandet",
+   "bookbar": false
+  },
+  {
+   "id": "c10886",
+   "name": "Gamle Torsætra",
+   "area": "Gjøvik, Land og Toten",
+   "county": "Innlandet",
+   "bookbar": true
+  },
+  {
+   "id": "c101317743",
+   "name": "Vannhuset",
+   "area": "Oslomarka",
+   "county": "Akershus",
+   "bookbar": true
+  },
+  {
+   "id": "c101255",
+   "name": "Halvorsenhytta",
+   "area": "Oslomarka",
+   "county": "Akershus",
+   "bookbar": true
+  },
+  {
+   "id": "c101058",
+   "name": "Flekkerhytta",
+   "area": "Grenland",
+   "county": "Telemark",
+   "bookbar": true
+  },
+  {
+   "id": "c10887501",
+   "name": "Wentzelhytta",
+   "area": "Oslomarka",
+   "county": "Akershus",
+   "bookbar": true
+  },
+  {
+   "id": "c10825",
+   "name": "Langøyene",
+   "area": "Oslofjorden",
+   "county": "Akershus",
+   "bookbar": false
+  },
+  {
+   "id": "c101060",
+   "name": "Sandfløten",
+   "area": "Hedmarken og Hedmarksvidda",
+   "county": "Innlandet",
+   "bookbar": true
+  },
+  {
+   "id": "c10658",
+   "name": "Kittilbua",
+   "area": "Langsua",
+   "county": "Innlandet",
+   "bookbar": true
+  },
+  {
+   "id": "c101135046",
+   "name": "Ertekroken",
+   "area": "Østfold",
+   "county": "Østfold",
+   "bookbar": true
+  },
+  {
+   "id": "c101171182",
+   "name": "Gapahuk - Sæteren Gård",
+   "area": "Oslomarka",
+   "county": "Akershus",
+   "bookbar": true
+  },
+  {
+   "id": "c101170963",
+   "name": "Damhytta",
+   "area": "Drammensmarka og Finnemarka",
+   "county": "Buskerud",
+   "bookbar": true
+  },
+  {
+   "id": "c10437",
+   "name": "Grønknutkoia",
+   "area": "Holleia, Vikerfjell og Vassfaret",
+   "county": "Buskerud",
+   "bookbar": true
+  },
+  {
+   "id": "c10233",
+   "name": "Storhøliseter",
+   "area": "Langsua",
+   "county": "Innlandet",
+   "bookbar": true
+  },
+  {
+   "id": "c10755",
+   "name": "Ravnsjøhytta",
+   "area": "Østfold",
+   "county": "Østfold",
+   "bookbar": true
+  },
+  {
+   "id": "c10740",
+   "name": "Fugleleiken",
+   "area": "Grenland",
+   "county": "Telemark",
+   "bookbar": true
+  },
+  {
+   "id": "c10458",
+   "name": "Bergersætra",
+   "area": "Odalen",
+   "county": "Innlandet",
+   "bookbar": true
+  },
+  {
+   "id": "c10973",
+   "name": "Iungsdalshytta",
+   "area": "Skarvheimen",
+   "county": "Buskerud",
+   "bookbar": false
+  },
+  {
+   "id": "c10773",
+   "name": "Bøvelstad",
+   "area": "Oslomarka",
+   "county": "Akershus",
+   "bookbar": true
+  },
+  {
+   "id": "c10657",
+   "name": "Koboltkoia",
+   "area": "Trillemarka og Holtefjell",
+   "county": "Buskerud",
+   "bookbar": true
+  },
+  {
+   "id": "c101124534",
+   "name": "Sandbekkhytta",
+   "area": "Oslomarka",
+   "county": "Akershus",
+   "bookbar": true
+  },
+  {
+   "id": "c101317685",
+   "name": "Elgstua - Sæteren Gård",
+   "area": "Oslomarka",
+   "county": "Akershus",
+   "bookbar": true
+  },
+  {
+   "id": "c10627",
+   "name": "Kalhovd turisthytte",
+   "area": "Hardangervidda",
+   "county": "Telemark",
+   "bookbar": false
+  },
+  {
+   "id": "c101114463",
+   "name": "Bekkensten",
+   "area": "Oslofjorden",
+   "county": "Akershus",
+   "bookbar": true
+  },
+  {
+   "id": "c101210144",
+   "name": "Tyristua",
+   "area": "Oslofjorden",
+   "county": "Vestfold",
+   "bookbar": true
+  },
+  {
+   "id": "c10494",
+   "name": "Grimsdalshytta",
+   "area": "Rondane",
+   "county": "Innlandet",
+   "bookbar": false
+  },
+  {
+   "id": "c10262",
+   "name": "Tjuenborgkoia",
+   "area": "Holleia, Vikerfjell og Vassfaret",
+   "county": "Buskerud",
+   "bookbar": true
+  },
+  {
+   "id": "c10514",
+   "name": "Kjørestua på Sagvollen",
+   "area": "Hadeland",
+   "county": "Innlandet",
+   "bookbar": true
+  },
+  {
+   "id": "c101111",
+   "name": "Rondvassbu",
+   "area": "Rondane",
+   "county": "Innlandet",
+   "bookbar": false
+  },
+  {
+   "id": "c101250514",
+   "name": "Svartvannskoia",
+   "area": "Oslomarka",
+   "county": "Akershus",
+   "bookbar": true
+  },
+  {
+   "id": "c101160",
+   "name": "Vikkelihytta",
+   "area": "Hadeland",
+   "county": "Akershus",
+   "bookbar": true
+  },
+  {
+   "id": "c101110",
+   "name": "Bjørnhollia",
+   "area": "Rondane",
+   "county": "Innlandet",
+   "bookbar": false
+  },
+  {
+   "id": "c101317739",
+   "name": "Stanghytta",
+   "area": "Østfold",
+   "county": "Østfold",
+   "bookbar": true
+  },
+  {
+   "id": "c101363",
+   "name": "Eldåbu",
+   "area": "Lillehammer-Rondane",
+   "county": "Innlandet",
+   "bookbar": true
+  },
+  {
+   "id": "c10552",
+   "name": "Veltdalshytta",
+   "area": "Tafjordfjella og Reinheimen",
+   "county": "Innlandet",
+   "bookbar": true
+  },
+  {
+   "id": "c101323",
+   "name": "Slettmoen",
+   "area": "Finnskogen og omegn",
+   "county": "Innlandet",
+   "bookbar": true
+  },
+  {
+   "id": "c101377",
+   "name": "Lageråkvisla ubetjent",
+   "area": "Hedmarken og Hedmarksvidda",
+   "county": "Innlandet",
+   "bookbar": true
+  },
+  {
+   "id": "c10315242",
+   "name": "Arnbjørnrud",
+   "area": "Østfold",
+   "county": "Østfold",
+   "bookbar": true
+  },
+  {
+   "id": "c10186276",
+   "name": "Vollumssætra",
+   "area": "Gjøvik, Land og Toten",
+   "county": "Innlandet",
+   "bookbar": false
+  },
+  {
+   "id": "c101317782",
+   "name": "Bjørkebu",
+   "area": "Langsua",
+   "county": "Innlandet",
+   "bookbar": true
+  },
+  {
+   "id": "c10660",
+   "name": "Haukeliseter fjellstue",
+   "area": "Hardangervidda",
+   "county": "Telemark",
+   "bookbar": true
+  },
+  {
+   "id": "c10653",
+   "name": "Stordalsbu",
+   "area": "Hardangervidda",
+   "county": "Telemark",
+   "bookbar": false
+  },
+  {
+   "id": "c10828",
+   "name": "Styggemannshytta",
+   "area": "Skrim, Vindfjell",
+   "county": "Buskerud",
+   "bookbar": true
+  },
+  {
+   "id": "c10783",
+   "name": "Smedmyrkoia",
+   "area": "Oslomarka",
+   "county": "Oslo",
+   "bookbar": true
+  },
+  {
+   "id": "c101127",
+   "name": "Nutevasshytta",
+   "area": "Austheiane",
+   "county": "Telemark",
+   "bookbar": true
+  },
+  {
+   "id": "c10686",
+   "name": "Sulebu",
+   "area": "Skarvheimen",
+   "county": "Innlandet",
+   "bookbar": false
+  },
+  {
+   "id": "c101298",
+   "name": "Slirabu",
+   "area": "Vestfoldmarka",
+   "county": "Vestfold",
+   "bookbar": true
+  },
+  {
+   "id": "c10929",
+   "name": "Finsehytta",
+   "area": "Skarvheimen",
+   "county": "Vestland",
+   "bookbar": true
+  },
+  {
+   "id": "c101190",
+   "name": "Vestfjellhytta",
+   "area": "Langsua",
+   "county": "Innlandet",
+   "bookbar": true
+  },
+  {
+   "id": "c101005",
+   "name": "Hoggerstua",
+   "area": "Vestfoldmarka",
+   "county": "Vestfold",
+   "bookbar": true
+  },
+  {
+   "id": "c101151322",
+   "name": "Stenfjellhytta ubetjent",
+   "area": "Hedmarken og Hedmarksvidda",
+   "county": "Innlandet",
+   "bookbar": true
+  },
+  {
+   "id": "c10722",
+   "name": "Narjordet",
+   "area": "Femundsmarka",
+   "county": "Innlandet",
+   "bookbar": false
+  },
+  {
+   "id": "c10230",
+   "name": "Gammelsaga",
+   "area": "Hedmarken og Hedmarksvidda",
+   "county": "Innlandet",
+   "bookbar": true
+  },
+  {
+   "id": "c10876250",
+   "name": "Trollsvann Annekset og Hunderom",
+   "area": "Vestfoldmarka",
+   "county": "Vestfold",
+   "bookbar": true
+  },
+  {
+   "id": "c101180171",
+   "name": "Hovlandshytta",
+   "area": "Drammensmarka og Finnemarka",
+   "county": "Buskerud",
+   "bookbar": true
+  },
+  {
+   "id": "c101170965",
+   "name": "Knoll - Sæteren Gård",
+   "area": "Oslomarka",
+   "county": "Akershus",
+   "bookbar": true
+  },
+  {
+   "id": "c101317699",
+   "name": "Hytta på Skjerva",
+   "area": "Hadeland",
+   "county": "Akershus",
+   "bookbar": true
+  },
+  {
+   "id": "c10623",
+   "name": "Trollsvannstua",
+   "area": "Vestfoldmarka",
+   "county": "Vestfold",
+   "bookbar": true
+  },
+  {
+   "id": "c101295",
+   "name": "Øyungshytta",
+   "area": "Hedmarken og Hedmarksvidda",
+   "county": "Innlandet",
+   "bookbar": true
+  },
+  {
+   "id": "c10780",
+   "name": "Lille Tømtehytta",
+   "area": "Oslomarka",
+   "county": "Oslo",
+   "bookbar": true
+  },
+  {
+   "id": "c10720",
+   "name": "Korsberghytta",
+   "area": "Alvdal Vestfjell",
+   "county": "Innlandet",
+   "bookbar": false
+  },
+  {
+   "id": "c101317708",
+   "name": "Løvøyhytta",
+   "area": "Oslofjorden",
+   "county": "Vestfold",
+   "bookbar": true
+  },
+  {
+   "id": "c101266",
+   "name": "Høgevarde nye",
+   "area": "Norefjell og Eggedalsfjella",
+   "county": "Buskerud",
+   "bookbar": true
+  },
+  {
+   "id": "c10336",
+   "name": "Lufsjå",
+   "area": "Blefjell og Vegglifjell",
+   "county": "Telemark",
+   "bookbar": false
+  },
+  {
+   "id": "c101369",
+   "name": "Liomseter",
+   "area": "Langsua",
+   "county": "Innlandet",
+   "bookbar": true
+  },
+  {
+   "id": "c10235",
+   "name": "Juskjølkoia",
+   "area": "Finnskogen og omegn",
+   "county": "Innlandet",
+   "bookbar": true
+  },
+  {
+   "id": "c10275",
+   "name": "Fløtdamkoia",
+   "area": "Hedmarken og Hedmarksvidda",
+   "county": "Innlandet",
+   "bookbar": true
+  },
+  {
+   "id": "c10585",
+   "name": "Hovstøyl",
+   "area": "Austheiane",
+   "county": "Telemark",
+   "bookbar": true
+  },
+  {
+   "id": "c10581",
+   "name": "Gjendebu",
+   "area": "Jotunheimen",
+   "county": "Innlandet",
+   "bookbar": false
+  },
+  {
+   "id": "c10489",
+   "name": "Ivarsbu",
+   "area": "Skrim, Vindfjell",
+   "county": "Buskerud",
+   "bookbar": true
+  },
+  {
+   "id": "c10774",
+   "name": "Drømmen",
+   "area": "Oslomarka",
+   "county": "Buskerud",
+   "bookbar": true
+  },
+  {
+   "id": "c10771",
+   "name": "Røyrivannskoia",
+   "area": "Oslomarka",
+   "county": "Akershus",
+   "bookbar": true
+  },
+  {
+   "id": "c101056",
+   "name": "Krokbua",
+   "area": "Lillehammer-Rondane",
+   "county": "Innlandet",
+   "bookbar": true
+  },
+  {
+   "id": "c101244",
+   "name": "Østtorphytta",
+   "area": "Østfold",
+   "county": "Østfold",
+   "bookbar": true
+  },
+  {
+   "id": "c10966664",
+   "name": "Gulsjøhytta",
+   "area": "Hadeland",
+   "county": "Innlandet",
+   "bookbar": true
+  },
+  {
+   "id": "c101317756",
+   "name": "Nysætra",
+   "area": "Odalen",
+   "county": "Innlandet",
+   "bookbar": true
+  },
+  {
+   "id": "c101145",
+   "name": "Dølerud",
+   "area": "Oslomarka",
+   "county": "Oslo",
+   "bookbar": true
+  },
+  {
+   "id": "c10501",
+   "name": "Daggrø",
+   "area": "Blefjell og Vegglifjell",
+   "county": "Telemark",
+   "bookbar": true
+  },
+  {
+   "id": "c101087",
+   "name": "Dusehesten",
+   "area": "Norefjell og Eggedalsfjella",
+   "county": "Buskerud",
+   "bookbar": true
+  },
+  {
+   "id": "c10583",
+   "name": "Glitterheim",
+   "area": "Jotunheimen",
+   "county": "Innlandet",
+   "bookbar": false
+  },
+  {
+   "id": "c10503",
+   "name": "Haldorbu",
+   "area": "Langsua",
+   "county": "Innlandet",
+   "bookbar": true
+  },
+  {
+   "id": "c101237",
+   "name": "Ellingseterkoia",
+   "area": "Holleia, Vikerfjell og Vassfaret",
+   "county": "Buskerud",
+   "bookbar": true
+  },
+  {
+   "id": "c101065",
+   "name": "Gaustatoppen Turisthytte",
+   "area": "Telemark",
+   "county": "Telemark",
+   "bookbar": false
+  },
+  {
+   "id": "c101378",
+   "name": "Svartskogkoia",
+   "area": "Hedmarken og Hedmarksvidda",
+   "county": "Innlandet",
+   "bookbar": true
+  },
+  {
+   "id": "c101114464",
+   "name": "Vikkelistallen",
+   "area": "Hadeland",
+   "county": "Akershus",
+   "bookbar": true
+  },
+  {
+   "id": "c10606",
+   "name": "Hannevoldhytta",
+   "area": "Vestfoldmarka",
+   "county": "Vestfold",
+   "bookbar": true
+  },
+  {
+   "id": "c10257",
+   "name": "Vikerkoia og Gamle Vikerkoia",
+   "area": "Holleia, Vikerfjell og Vassfaret",
+   "county": "Buskerud",
+   "bookbar": true
+  },
+  {
+   "id": "c10229",
+   "name": "Storkvolvbua",
+   "area": "Langsua",
+   "county": "Innlandet",
+   "bookbar": true
+  },
+  {
+   "id": "c101023132",
+   "name": "Frøne",
+   "area": "Østfold",
+   "county": "Østfold",
+   "bookbar": true
+  },
+  {
+   "id": "c101114465",
+   "name": "Nydalsbua",
+   "area": "Oslomarka",
+   "county": "Akershus",
+   "bookbar": true
+  },
+  {
+   "id": "c101273",
+   "name": "Øitangen",
+   "area": "Telemark",
+   "county": "Telemark",
+   "bookbar": true
+  },
+  {
+   "id": "c10786",
+   "name": "Råbjørnhytta",
+   "area": "Oslomarka",
+   "county": "Akershus",
+   "bookbar": true
+  },
+  {
+   "id": "c10131",
+   "name": "Skjellbreidhytta (stengt)",
+   "area": "Langsua",
+   "county": "Innlandet",
+   "bookbar": true
+  },
+  {
+   "id": "c10351",
+   "name": "Haukenestårnet",
+   "area": "Østfold",
+   "county": "Akershus",
+   "bookbar": true
+  },
+  {
+   "id": "c101279",
+   "name": "Himingsjå Turisthytte",
+   "area": "Telemark",
+   "county": "Telemark",
+   "bookbar": true
+  },
+  {
+   "id": "c10136374",
+   "name": "Breivoll Gård",
+   "area": "Oslofjorden",
+   "county": "Akershus",
+   "bookbar": true
+  },
+  {
+   "id": "c101022071",
+   "name": "Babord - Gressholmen",
+   "area": "Oslofjorden",
+   "county": "Oslo",
+   "bookbar": true
+  },
+  {
+   "id": "c10349",
+   "name": "Halgutusveen",
+   "area": "Hedmarken og Hedmarksvidda",
+   "county": "Innlandet",
+   "bookbar": true
+  },
+  {
+   "id": "c10772",
+   "name": "Bekkestua",
+   "area": "Oslomarka",
+   "county": "Akershus",
+   "bookbar": true
+  },
+  {
+   "id": "c101362",
+   "name": "Øvresaga",
+   "area": "Oslomarka",
+   "county": "Akershus",
+   "bookbar": true
+  },
+  {
+   "id": "c10438",
+   "name": "Svinessaga Sagahallen forsamlingslokalet",
+   "area": "Vestfoldmarka",
+   "county": "Vestfold",
+   "bookbar": true
+  },
+  {
+   "id": "c10726",
+   "name": "Svukuriset",
+   "area": "Femundsmarka",
+   "county": "Innlandet",
+   "bookbar": false
+  },
+  {
+   "id": "c101024831",
+   "name": "Styrbord - Gressholmen",
+   "area": "Oslofjorden",
+   "county": "Oslo",
+   "bookbar": true
+  },
+  {
+   "id": "c10199",
+   "name": "Toveseter",
+   "area": "Norefjell og Eggedalsfjella",
+   "county": "Buskerud",
+   "bookbar": true
+  },
+  {
+   "id": "c101211",
+   "name": "Hamborgstrømpaviljongen",
+   "area": "Drammensmarka og Finnemarka",
+   "county": "Buskerud",
+   "bookbar": true
+  },
+  {
+   "id": "c10232",
+   "name": "Snippkoia - STENGT fra 17. september 2024",
+   "area": "Hedmarken og Hedmarksvidda",
+   "county": "Innlandet",
+   "bookbar": false
+  },
+  {
+   "id": "c101054",
+   "name": "Holmavatn",
+   "area": "Hardangervidda Sør",
+   "county": "Telemark",
+   "bookbar": true
+  },
+  {
+   "id": "c101170962",
+   "name": "Eventyrhytta - Sæteren Gård",
+   "area": "Oslomarka",
+   "county": "Akershus",
+   "bookbar": true
+  },
+  {
+   "id": "c101317710",
+   "name": "Merkebekkbua",
+   "area": "Telemark",
+   "county": "Telemark",
+   "bookbar": false
+  },
+  {
+   "id": "c10517",
+   "name": "Sveinsbu",
+   "area": "Kongsberg, Meheia, Hvittingfoss, Svene",
+   "county": "Buskerud",
+   "bookbar": true
+  },
+  {
+   "id": "c10455",
+   "name": "Presteseter",
+   "area": "Skrim, Vindfjell",
+   "county": "Vestfold",
+   "bookbar": true
+  },
+  {
+   "id": "c10604",
+   "name": "Gjendesheim",
+   "area": "Jotunheimen",
+   "county": "Innlandet",
+   "bookbar": false
+  },
+  {
+   "id": "c101205966",
+   "name": "Håøya",
+   "area": "Oslofjorden",
+   "county": "Vestfold",
+   "bookbar": false
+  },
+  {
+   "id": "c101368",
+   "name": "Stavali turisthytte",
+   "area": "Hardangervidda",
+   "county": "Vestland",
+   "bookbar": false
+  },
+  {
+   "id": "c101389",
+   "name": "Øvre Fjellstul",
+   "area": "Blefjell og Vegglifjell",
+   "county": "Telemark",
+   "bookbar": true
+  },
+  {
+   "id": "c10442",
+   "name": "Torsdalsbu",
+   "area": "Austheiane",
+   "county": "Telemark",
+   "bookbar": true
+  },
+  {
+   "id": "c10746",
+   "name": "Mogen Turisthytte",
+   "area": "Hardangervidda",
+   "county": "Telemark",
+   "bookbar": false
+  },
+  {
+   "id": "c10352",
+   "name": "Budalsvika",
+   "area": "Østfold",
+   "county": "Østfold",
+   "bookbar": true
+  },
+  {
+   "id": "c10234",
+   "name": "Renosdammen",
+   "area": "Finnskogen og omegn",
+   "county": "Innlandet",
+   "bookbar": true
+  },
+  {
+   "id": "c101297",
+   "name": "Stallen",
+   "area": "Oslomarka",
+   "county": "Akershus",
+   "bookbar": true
+  },
+  {
+   "id": "c101286902",
+   "name": "Eikenes Øst & Vest",
+   "area": "Grenland",
+   "county": "Telemark",
+   "bookbar": false
+  },
+  {
+   "id": "c10843",
+   "name": "Sildevika",
+   "area": "Grenland",
+   "county": "Telemark",
+   "bookbar": false
+  },
+  {
+   "id": "c10222",
+   "name": "Fogdehytta",
+   "area": "Gjøvik, Land og Toten",
+   "county": "Innlandet",
+   "bookbar": true
+  },
+  {
+   "id": "c101097025",
+   "name": "Damslett",
+   "area": "Drammensmarka og Finnemarka",
+   "county": "Buskerud",
+   "bookbar": true
+  },
+  {
+   "id": "c101365",
+   "name": "Lågaros",
+   "area": "Hardangervidda",
+   "county": "Buskerud",
+   "bookbar": true
+  },
+  {
+   "id": "c10664",
+   "name": "Torehytten",
+   "area": "Hardangervidda",
+   "county": "Vestland",
+   "bookbar": true
+  },
+  {
+   "id": "c10795",
+   "name": "Morskogen vokterbolig",
+   "area": "Hedmarken og Hedmarksvidda",
+   "county": "Akershus",
+   "bookbar": false
+  },
+  {
+   "id": "c101233402",
+   "name": "Skjennungsvolden",
+   "area": "Oslomarka",
+   "county": "Oslo",
+   "bookbar": true
+  },
+  {
+   "id": "c101168",
+   "name": "Fehytta",
+   "area": "Langsua",
+   "county": "Innlandet",
+   "bookbar": true
+  },
+  {
+   "id": "c101059",
+   "name": "Leirvassbu Turisthytte",
+   "area": "Jotunheimen",
+   "county": "Innlandet",
+   "bookbar": false
+  },
+  {
+   "id": "c10680",
+   "name": "Slettningsbu",
+   "area": "Skarvheimen",
+   "county": "Innlandet",
+   "bookbar": false
+  },
+  {
+   "id": "c10580",
+   "name": "Fondsbu",
+   "area": "Jotunheimen",
+   "county": "Innlandet",
+   "bookbar": false
+  },
+  {
+   "id": "c10236",
+   "name": "Flisberget",
+   "area": "Finnskogen og omegn",
+   "county": "Innlandet",
+   "bookbar": true
+  },
+  {
+   "id": "c101001",
+   "name": "Krokan Turisthytte",
+   "area": "Telemark",
+   "county": "Telemark",
+   "bookbar": false
+  },
+  {
+   "id": "c10630",
+   "name": "Kjeldebu",
+   "area": "Hardangervidda",
+   "county": "Vestland",
+   "bookbar": false
+  },
+  {
+   "id": "c101097",
+   "name": "Jørgenhytta",
+   "area": "Oslomarka",
+   "county": "Buskerud",
+   "bookbar": true
+  },
+  {
+   "id": "c10781",
+   "name": "Myrsetra",
+   "area": "Oslomarka",
+   "county": "Buskerud",
+   "bookbar": true
+  },
+  {
+   "id": "c101317678",
+   "name": "Sprengbekkhytta",
+   "area": "Gjøvik, Land og Toten",
+   "county": "Innlandet",
+   "bookbar": true
+  },
+  {
+   "id": "c10946",
+   "name": "Trulsbu",
+   "area": "Breheimen med Jostedalsbreen",
+   "county": "Innlandet",
+   "bookbar": false
+  },
+  {
+   "id": "c10516",
+   "name": "Sigridsbu",
+   "area": "Blefjell og Vegglifjell",
+   "county": "Telemark",
+   "bookbar": true
+  },
+  {
+   "id": "c10775",
+   "name": "Fjellvang",
+   "area": "Oslomarka",
+   "county": "Akershus",
+   "bookbar": true
+  },
+  {
+   "id": "c10650",
+   "name": "Djupslia",
+   "area": "Lillehammer-Rondane",
+   "county": "Innlandet",
+   "bookbar": true
+  },
+  {
+   "id": "c10702",
+   "name": "Dalabu",
+   "area": "Norefjell og Eggedalsfjella",
+   "county": "Buskerud",
+   "bookbar": true
+  },
+  {
+   "id": "c10712",
+   "name": "Litlos",
+   "area": "Hardangervidda",
+   "county": "Vestland",
+   "bookbar": false
+  },
+  {
+   "id": "c10723",
+   "name": "Raudsjødalen",
+   "area": "Femundsmarka",
+   "county": "Innlandet",
+   "bookbar": false
+  },
+  {
+   "id": "c10154",
+   "name": "Fieldfarehytta",
+   "area": "Tafjordfjella og Reinheimen",
+   "county": "Innlandet",
+   "bookbar": true
+  },
+  {
+   "id": "c10645",
+   "name": "Kobberhaughytta",
+   "area": "Oslomarka",
+   "county": "Oslo",
+   "bookbar": true
+  },
+  {
+   "id": "c10636",
+   "name": "Hellevassbu",
+   "area": "Hardangervidda",
+   "county": "Vestland",
+   "bookbar": false
+  },
+  {
+   "id": "c10490",
+   "name": "Sota Sæter",
+   "area": "Breheimen med Jostedalsbreen",
+   "county": "Innlandet",
+   "bookbar": false
+  },
+  {
+   "id": "c10258",
+   "name": "Høgevarde gamle",
+   "area": "Norefjell og Eggedalsfjella",
+   "county": "Buskerud",
+   "bookbar": true
+  },
+  {
+   "id": "c101301633",
+   "name": "Ringkolltoppen",
+   "area": "Oslomarka",
+   "county": "Buskerud",
+   "bookbar": true
+  },
+  {
+   "id": "c101317744",
+   "name": "Evjenhytta",
+   "area": "Akershus Øst",
+   "county": "Akershus",
+   "bookbar": true
+  },
+  {
+   "id": "c101225",
+   "name": "Garsjøkoia",
+   "area": "Drammensmarka og Finnemarka",
+   "county": "Buskerud",
+   "bookbar": true
+  },
+  {
+   "id": "c10785",
+   "name": "Røverhula",
+   "area": "Oslomarka",
+   "county": "Akershus",
+   "bookbar": true
+  },
+  {
+   "id": "c10715",
+   "name": "Yksendalsbu",
+   "area": "Jotunheimen",
+   "county": "Innlandet",
+   "bookbar": false
+  },
+  {
+   "id": "c10790",
+   "name": "Småvannsbu",
+   "area": "Oslomarka",
+   "county": "Akershus",
+   "bookbar": true
+  },
+  {
+   "id": "c10495",
+   "name": "Sandhaug",
+   "area": "Hardangervidda",
+   "county": "Vestland",
+   "bookbar": false
+  },
+  {
+   "id": "c101193",
+   "name": "Storeskag",
+   "area": "Langsua",
+   "county": "Innlandet",
+   "bookbar": true
+  },
+  {
+   "id": "c10429",
+   "name": "Svarthamar",
+   "area": "Langsua",
+   "county": "Innlandet",
+   "bookbar": true
+  },
+  {
+   "id": "c10649",
+   "name": "Lyngbua",
+   "area": "Lillehammer-Rondane",
+   "county": "Innlandet",
+   "bookbar": false
+  },
+  {
+   "id": "c10744",
+   "name": "Mårbu",
+   "area": "Hardangervidda",
+   "county": "Telemark",
+   "bookbar": false
+  },
+  {
+   "id": "c10778",
+   "name": "Katnosdammen",
+   "area": "Oslomarka",
+   "county": "Buskerud",
+   "bookbar": true
+  },
+  {
+   "id": "c10666",
+   "name": "Sommerseter",
+   "area": "Grenland",
+   "county": "Telemark",
+   "bookbar": true
+  },
+  {
+   "id": "c10608",
+   "name": "Skolla storhytte",
+   "area": "Hedmarken og Hedmarksvidda",
+   "county": "Innlandet",
+   "bookbar": true
+  },
+  {
+   "id": "c101296",
+   "name": "Pråmvika",
+   "area": "Kongsberg, Meheia, Hvittingfoss, Svene",
+   "county": "Buskerud",
+   "bookbar": true
+  },
+  {
+   "id": "c10526",
+   "name": "Slæom",
+   "area": "Breheimen med Jostedalsbreen",
+   "county": "Innlandet",
+   "bookbar": false
+  },
+  {
+   "id": "c1015390",
+   "name": "Huldreheim",
+   "area": "Oslomarka",
+   "county": "Akershus",
+   "bookbar": true
+  },
+  {
+   "id": "c10584",
+   "name": "Oskampen",
+   "area": "Langsua",
+   "county": "Innlandet",
+   "bookbar": true
+  },
+  {
+   "id": "c10656",
+   "name": "Darrebu",
+   "area": "Skrim, Vindfjell",
+   "county": "Buskerud",
+   "bookbar": true
+  },
+  {
+   "id": "c10261",
+   "name": "Brannåsen",
+   "area": "Oslofjorden",
+   "county": "Vestfold",
+   "bookbar": true
+  },
+  {
+   "id": "c10788",
+   "name": "Sinnerdammen",
+   "area": "Oslomarka",
+   "county": "Buskerud",
+   "bookbar": true
+  },
+  {
+   "id": "c10648",
+   "name": "Vetåbua",
+   "area": "Lillehammer-Rondane",
+   "county": "Innlandet",
+   "bookbar": true
+  },
+  {
+   "id": "c101380",
+   "name": "Sæteren Gård - Hovedhus+Sovehus",
+   "area": "Oslomarka",
+   "county": "Akershus",
+   "bookbar": true
+  },
+  {
+   "id": "c10504",
+   "name": "Skriurusten",
+   "area": "Langsua",
+   "county": "Innlandet",
+   "bookbar": true
+  },
+  {
+   "id": "c10611040",
+   "name": "Røggjen",
+   "area": "Hemsedal, Golsfjellet og Valdres",
+   "county": "Buskerud",
+   "bookbar": true
+  },
+  {
+   "id": "c10488",
+   "name": "Solumhytta",
+   "area": "Skrim, Vindfjell",
+   "county": "Telemark",
+   "bookbar": true
+  },
+  {
+   "id": "c10832",
+   "name": "Knausen",
+   "area": "Femundsmarka",
+   "county": "Innlandet",
+   "bookbar": false
+  },
+  {
+   "id": "c101209",
+   "name": "Fuglemyrhytta",
+   "area": "Oslomarka",
+   "county": "Oslo",
+   "bookbar": true
+  },
+  {
+   "id": "c10779",
+   "name": "Mustadkroken",
+   "area": "Oslomarka",
+   "county": "Akershus",
+   "bookbar": true
+  },
+  {
+   "id": "c101199",
+   "name": "Åkersætra ubetjent",
+   "area": "Hedmarken og Hedmarksvidda",
+   "county": "Innlandet",
+   "bookbar": true
+  },
+  {
+   "id": "c10338",
+   "name": "Tingstadkoia",
+   "area": "Hedmarken og Hedmarksvidda",
+   "county": "Innlandet",
+   "bookbar": true
+  },
+  {
+   "id": "c101321",
+   "name": "Tyssevassbu",
+   "area": "Hardangervidda",
+   "county": "Vestland",
+   "bookbar": false
+  },
+  {
+   "id": "c10776",
+   "name": "Hovdehytta",
+   "area": "Oslomarka",
+   "county": "Akershus",
+   "bookbar": true
+  },
+  {
+   "id": "c10595",
+   "name": "Nydalshytta",
+   "area": "Oslomarka",
+   "county": "Akershus",
+   "bookbar": true
+  },
+  {
+   "id": "c10782",
+   "name": "Presthytta",
+   "area": "Oslomarka",
+   "county": "Buskerud",
+   "bookbar": true
+  },
+  {
+   "id": "c10273",
+   "name": "Mæhlumsætra",
+   "area": "Gjøvik, Land og Toten",
+   "county": "Innlandet",
+   "bookbar": true
+  },
+  {
+   "id": "c10758",
+   "name": "Rembesdalseter",
+   "area": "Hardangervidda",
+   "county": "Vestland",
+   "bookbar": false
+  },
+  {
+   "id": "c10486",
+   "name": "Selsli",
+   "area": "Kongsberg, Meheia, Hvittingfoss, Svene",
+   "county": "Telemark",
+   "bookbar": true
+  },
+  {
+   "id": "c10509",
+   "name": "Fønhuskoia",
+   "area": "Holleia, Vikerfjell og Vassfaret",
+   "county": "Innlandet",
+   "bookbar": true
+  },
+  {
+   "id": "c101062",
+   "name": "Solheimstulen",
+   "area": "Hardangervidda",
+   "county": "Buskerud",
+   "bookbar": false
+  },
+  {
+   "id": "c10777",
+   "name": "Store Tømtehytta",
+   "area": "Oslomarka",
+   "county": "Oslo",
+   "bookbar": true
+  },
+  {
+   "id": "c101108",
+   "name": "Storekrakkoia",
+   "area": "Holleia, Vikerfjell og Vassfaret",
+   "county": "Innlandet",
+   "bookbar": true
+  },
+  {
+   "id": "c10716",
+   "name": "Storgrytdalseter",
+   "area": "Alvdal Vestfjell",
+   "county": "Innlandet",
+   "bookbar": false
+  },
+  {
+   "id": "c101250515",
+   "name": "Svartpoten",
+   "area": "Oslomarka",
+   "county": "Akershus",
+   "bookbar": true
+  },
+  {
+   "id": "c10789",
+   "name": "Svarvestolen",
+   "area": "Drammensmarka og Finnemarka",
+   "county": "Buskerud",
+   "bookbar": true
+  },
+  {
+   "id": "c10973113",
+   "name": "Skarpenæring",
+   "area": "Telemark",
+   "county": "Telemark",
+   "bookbar": true
+  },
+  {
+   "id": "c10586",
+   "name": "Nystøyl",
+   "area": "Austheiane",
+   "county": "Telemark",
+   "bookbar": true
+  },
+  {
+   "id": "c10714",
+   "name": "Tomashelleren",
+   "area": "Jotunheimen",
+   "county": "Innlandet",
+   "bookbar": false
+  },
+  {
+   "id": "c10228",
+   "name": "Torsbu",
+   "area": "Tafjordfjella og Reinheimen",
+   "county": "Innlandet",
+   "bookbar": false
+  },
+  {
+   "id": "c10221",
+   "name": "Vesterås",
+   "area": "Gjøvik, Land og Toten",
+   "county": "Innlandet",
+   "bookbar": true
+  },
+  {
+   "id": "c101282092",
+   "name": "Uglebu - Sæteren Gård",
+   "area": "Oslomarka",
+   "county": "Akershus",
+   "bookbar": true
+  },
+  {
+   "id": "c10510",
+   "name": "Vassfarkoia",
+   "area": "Holleia, Vikerfjell og Vassfaret",
+   "county": "Buskerud",
+   "bookbar": true
+  },
+  {
+   "id": "c10820",
+   "name": "Vålet",
+   "area": "Finnskogen og omegn",
+   "county": "Innlandet",
+   "bookbar": true
+  },
+  {
+   "id": "c10607",
+   "name": "Åkersætra leirsted",
+   "area": "Hedmarken og Hedmarksvidda",
+   "county": "Innlandet",
+   "bookbar": true
+  }
+ ],
  "weeks": [
   {
    "from": "2026-11-27",
@@ -903,7 +2634,7 @@
      "area": "Oslomarka",
      "areaId": 1223,
      "county": "Oslo",
-     "free": 25,
+     "free": 23,
      "total": 61,
      "price": 1710
     },
@@ -2695,7 +4426,7 @@
      "area": "Oslomarka",
      "areaId": 1223,
      "county": "Akershus",
-     "free": 8,
+     "free": 6,
      "total": 8,
      "price": 520
     },
@@ -4851,7 +6582,7 @@
      "area": "Oslomarka",
      "areaId": 1223,
      "county": "Oslo",
-     "free": 41,
+     "free": 39,
      "total": 61,
      "price": 1710
     },
