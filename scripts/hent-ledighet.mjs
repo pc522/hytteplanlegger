@@ -153,5 +153,5 @@ if (uker.every((u) => u.rows.length === 0)) { console.error('Ingen ledighet funn
 
 const naa = new Date();
 const lesbar = naa.toLocaleString('nb-NO', { timeZone: 'Europe/Oslo', day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' }).replace(',', ' kl.');
-fs.writeFileSync(UT, JSON.stringify({ fetched: lesbar, hentet: naa.toISOString(), omrader: cfg.beskrivelse, kilde: 'hyttebestilling.dnt.no', weeks: uker }, null, 1) + '\n');
+fs.writeFileSync(UT, JSON.stringify({ fetched: lesbar, hentet: naa.toISOString(), omrader: cfg.beskrivelse, kilde: 'hyttebestilling.dnt.no', hytter: valgte.map((h) => ({ id: 'c' + h.id, name: h.name, area: h.area, county: h.county, bookbar: !ikkeBookbare.has(h.id) })), weeks: uker }, null, 1) + '\n');
 console.log(`Skrev ${UT}. ${kall} kall, ${feil} feil.`);

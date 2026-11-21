@@ -325,13 +325,47 @@ footer { margin-top: 28px; font-size: 12.5px; color: var(--ink-2); border-top: 1
   function nn(x) { return String(x || "").toLowerCase().replace(/[^a-zæøå0-9]/g, ""); }
   function addExtra(id, name, area) { if (byId[id]) return; var c = { id: id, name: name, area: area || "", rules: [], def: null, kind: "", extra: true }; byId[id] = c; EXTRA.push(c); }
   function normAvail(j) {
-    var byName = {}; CABINS.forEach(function (c) { byName[nn(c.name)] = c.id; });
+    var names = CABINS.map(function (c) { return { id: c.id, n: nn(c.name) }; });
+    function match(name) {
+      var k = nn(name); if (!k) return null;
+      for (var i = 0; i < names.length; i++) if (names[i].n === k) return names[i].id;
+      for (var m = 0; m < names.length; m++) if (k.length >= 5 && (names[m].n.indexOf(k) === 0 || (names[m].n.length >= 5 && k.indexOf(names[m].n) === 0))) return names[m].id;
+      return null;
+    }
     j.weeks.forEach(function (w) { w.rows.forEach(function (r) {
-      var hit = byName[nn(r.name)]; if (hit) r.id = hit; else addExtra(r.id, r.name, r.area);
+      var hit = match(r.name); if (hit) r.id = hit; else addExtra(r.id, r.name, r.area);
     }); });
+    j.bookable = {};
+    (j.hytter || []).forEach(function (h) { var id = match(h.name) || h.id; j.bookable[id] = !!h.bookbar; });
     state.stops.forEach(function (s) { if (!byId[s.cabinId] && s.cabinName) addExtra(s.cabinId, s.cabinName, ""); });
     return j;
   }
+  /* Levende status fra bookingportalen for en hytte: ledige helger og om den kan bookes. */
+  function liveInfo(c) {
+    if (!AVAIL) return null;
+    var ws = liveWeeks(), n = 0, first = null;
+    ws.forEach(function (w) { w.rows.forEach(function (r) { if (r.id === c.id) { n++; if (!first) first = { w: w, r: r }; } }); });
+    var b = AVAIL.bookable ? AVAIL.bookable[c.id] : undefined;
+    if (n > 0) b = true;
+    return { free: n, of: ws.length, first: first, bookable: b };
+  }
+  function effStatus(c, d) {
+    var st = statusFor(c, d);
+    if (st.kind !== "unknown") return st;
+    var li = liveInfo(c); if (!li) return st;
+    if (li.free > 0) return { kind: "open", label: "Kan bookes: ledig " + li.free + " av " + li.of + " helger", approx: "Fra bookingportalen, åpningstid er ikke oppgitt." };
+    if (li.bookable === true) return { kind: "neutral", label: "Ingen ledige senger de neste " + li.of + " helgene", approx: "Fullbooket eller stengt, ifølge bookingportalen." };
+    if (li.bookable === false) return { kind: "neutral", label: "Ikke i bookingportalen", approx: "Selvbetjent eller må avtales direkte. Se UT.no." };
+    return st;
+  }
+  function stopStatus(c, d) {
+    var st = statusFor(c, d);
+    if (st.kind !== "unknown" || !AVAIL) return st;
+    var ws = liveWeeks();
+    for (var i = 0; i < ws.length; i++) if (d >= ws[i].from && d < ws[i].to && ws[i].rows.some(function (r) { return r.id === c.id; })) return { kind: "open", label: "Ledig i portalen", approx: "" };
+    return st;
+  }
+  function isBookable(c) { if (c.book === true) return true; var li = liveInfo(c); return !!(li && li.bookable === true); }
   var state = { ledArea: "", tab: "hytter", week: 0, date: TODAY, q: "", areas: {}, kinds: {}, dog: false, book: false, stops: [], form: { cabin: "", trip: "Min tur", date: TODAY, nights: 1, guests: 2 }, stored: false, loadErr: "" };
   var col = null;
 
@@ -356,26 +390,26 @@ footer { margin-top: 28px; font-size: 12.5px; color: var(--ink-2); border-top: 1
       if (!ok) return false;
     }
     if (state.dog && !c.dog) return false;
-    if (state.book && c.book !== true) return false;
+    if (state.book && !isBookable(c)) return false;
     return true;
   }
   function chip(key, label, on, attr) { return '<button class="chip" type="button" aria-pressed="' + (on ? "true" : "false") + '" data-chip="' + attr + '" data-key="' + esc(key) + '">' + esc(label) + "</button>"; }
 
   function renderHytter() {
     var list = CABINS.filter(cabinMatches);
-    var counts = { open: 0, staffed: 0, closed: 0, unknown: 0 };
-    list.forEach(function (c) { counts[statusFor(c, state.date).kind]++; });
+    var counts = { open: 0, staffed: 0, closed: 0, unknown: 0, neutral: 0 };
+    list.forEach(function (c) { var k = effStatus(c, state.date).kind; counts[k] = (counts[k] || 0) + 1; });
     var html = '<div class="notice"><p>Hvor mange senger som er ledige på en bestemt dato finnes bare i DNTs bookingportal. Her ser du åpningstid for valgt dato, regler og hvilke hytter som kan bookes, og kan legge dem inn i turen din.</p><div class="row"><a class="btn small" href="' + BOOKING_URL + '" target="_blank" rel="noopener">Åpne bookingportalen</a></div></div>';
     html += '<div class="filters"><input type="search" id="q" placeholder="Søk etter hytte eller område" aria-label="Søk etter hytte eller område" value="' + esc(state.q) + '">';
     html += '<div class="chips" aria-label="Område">' + AREAS.map(function (a) { return chip(a, a, !!state.areas[a], "area"); }).join("") + "</div>";
     html += '<div class="chips" aria-label="Filtre">' + chip("betjent", "Betjent", !!state.kinds.betjent, "kind") + chip("selv", "Selvbetjent", !!state.kinds.selv, "kind") + chip("dog", "Hund mulig", state.dog, "dog") + chip("book", "Kan bookes", state.book, "book") + "</div></div>";
     html += '<div class="summary"><strong style="color:var(--ink)">' + esc(fmtDate(state.date, true)) + ":</strong> " +
-      '<span class="pill open">' + counts.open + " åpne</span> <span class=\"pill staffed\">" + counts.staffed + " betjent</span> <span class=\"pill closed\">" + counts.closed + " stengt</span> <span class=\"pill unknown\">" + counts.unknown + " ikke bekreftet</span></div>";
+      '<span class="pill open">' + counts.open + " åpne</span> <span class=\"pill staffed\">" + counts.staffed + " betjent</span> <span class=\"pill closed\">" + counts.closed + " stengt</span> <span class=\"pill unknown\">" + counts.unknown + " ikke bekreftet</span>" + (counts.neutral ? ' <span class="pill neutral">' + counts.neutral + " uten ledighet</span>" : "") + "</div>";
     if (!list.length) html += '<div class="empty"><h2>Ingen treff</h2><p>Ingen hytter passer filtrene. Fjern et filter for å se flere.</p></div>';
     html += '<div class="cards">' + list.map(function (c) {
-      var st = statusFor(c, state.date);
+      var st = effStatus(c, state.date), li = liveInfo(c);
       var beds = c.beds ? c.beds + " sengeplasser" + (c.bookBeds ? ", " + c.bookBeds + " kan bookes" : "") : "";
-      var bookTxt = c.book === true ? "Kan bookes i portalen" : "Sjekk booking på UT.no";
+      var bookTxt = isBookable(c) ? "Kan bookes i portalen" : (li && li.bookable === false ? "Ikke i bookingportalen" : "Sjekk booking på UT.no");
       return '<article class="card"><div><h3>' + esc(c.name) + '</h3><div class="meta"><span>' + esc(c.area) + "</span><span>" + esc(c.kind) + "</span>" + (c.assoc ? "<span>" + esc(c.assoc) + "</span>" : "") + (beds ? "<span>" + esc(beds) + "</span>" : "") + "</div></div>" +
         '<div><span class="pill ' + st.kind + '">' + esc(st.label) + "</span>" + (st.approx ? ' <span class="approx">' + esc(st.approx) + "</span>" : "") + "</div>" +
         "<p>" + esc(c.note) + "</p>" +
@@ -429,7 +463,7 @@ footer { margin-top: 28px; font-size: 12.5px; color: var(--ink-2); border-top: 1
     var c = byId[s.cabinId]; if (!c) return [];
     var out = [], closedOn = null, unknownOn = null;
     for (var i = 0; i < Math.max(1, s.nights); i++) {
-      var d = addDays(s.date, i), st = statusFor(c, d);
+      var d = addDays(s.date, i), st = stopStatus(c, d);
       if (st.kind === "closed" && !closedOn) closedOn = { d: d, st: st };
       if (st.kind === "unknown" && !unknownOn) unknownOn = d;
     }
@@ -439,7 +473,7 @@ footer { margin-top: 28px; font-size: 12.5px; color: var(--ink-2); border-top: 1
       var days = diffDays(s.date, TODAY);
       if (s.status === "Planlagt" && days >= 0 && days <= 14) out.push({ k: "warn", t: days === 0 ? "Ankomst i dag og ikke booket." : "Ikke booket, ankomst om " + days + (days === 1 ? " dag." : " dager.") });
       if (s.status === "Bestilt" && days >= 0 && days <= 7) out.push({ k: "info", t: "Bestilt men ikke betalt. Sjekk at betalingen er gjennomført." });
-      if (c.book !== true && s.status === "Planlagt") out.push({ k: "info", t: "Det er ikke bekreftet at denne hytta kan bookes i portalen. Se UT.no." });
+      if (!isBookable(c) && s.status === "Planlagt") out.push({ k: "info", t: "Det er ikke bekreftet at denne hytta kan bookes i portalen. Se UT.no." });
     }
     return out;
   }
