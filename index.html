@@ -50,7 +50,7 @@ button, input, select { font: inherit; color: inherit; }
 a { color: var(--forest); }
 :focus-visible { outline: 3px solid var(--forest); outline-offset: 2px; border-radius: 4px; }
 
-header.top { display: flex; gap: 14px; align-items: center; padding-block: 18px 12px; flex-wrap: wrap; }
+header.top { display: flex; gap: 14px; align-items: center; padding-block: 14px 8px; flex-wrap: wrap; }
 .tmark { width: 44px; height: 44px; flex: none; background: var(--tmark); color: #fff; display: grid; place-items: center; border-radius: 4px; }
 .titlebox { flex: 1 1 200px; min-width: 0; }
 h1 { font-size: 34px; line-height: 1; text-transform: uppercase; overflow-wrap: anywhere; }
@@ -135,7 +135,10 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .guide h2 { font-size: 24px; }
 .src { font-size: 12.5px; color: var(--ink-2); }
 footer { margin-top: 28px; font-size: 12.5px; color: var(--ink-2); border-top: 1px solid var(--line); padding-top: 10px; }
-.weeks { display: flex; gap: 6px; flex-wrap: wrap; }
+.weeks { display: flex; gap: 6px; flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; scrollbar-width: thin; }
+.week { flex: 0 0 auto; }
+.notice.slim { display: flex; gap: 10px; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+.notice.slim span { flex: 1 1 200px; }
 .week { border: 1px solid var(--line); background: var(--surface); border-radius: 8px; padding: 6px 12px; cursor: pointer; min-height: 44px; text-align: left; line-height: 1.2; }
 .week .wd { font-family: var(--font-display); font-size: 20px; font-weight: 700; display: block; }
 .week .wn { font-size: 12px; color: var(--ink-2); }
@@ -144,8 +147,10 @@ footer { margin-top: 28px; font-size: 12.5px; color: var(--ink-2); border-top: 1
 .price { font-family: var(--font-display); font-size: 22px; font-weight: 600; }
 .avrow { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; flex-wrap: wrap; }
 .always { background: var(--ok-bg); color: var(--ok); border-radius: 6px; padding: 8px 12px; font-size: 14px; }
+.always summary { cursor: pointer; }
+.always p { margin: 8px 0 0; }
 [hidden] { display: none !important; }
-@media (max-width: 480px) { .tab { font-size: 15px; padding: 12px 2px; letter-spacing: 0; } h1 { font-size: 30px; } .stop { grid-template-columns: 62px minmax(0, 1fr); } .gap { padding-left: 74px; } }
+@media (max-width: 480px) { .tab { font-size: 15px; padding: 12px 2px; letter-spacing: 0; } h1 { font-size: 22px; letter-spacing: 0; overflow-wrap: normal; } .stop { grid-template-columns: 62px minmax(0, 1fr); } .gap { padding-left: 74px; } }
 @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; } }
 </style>
 </head>
@@ -155,19 +160,19 @@ footer { margin-top: 28px; font-size: 12.5px; color: var(--ink-2); border-top: 1
     <div class="tmark" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 26 26"><rect x="3" y="3" width="20" height="5" fill="currentColor"/><rect x="10.5" y="3" width="5" height="20" fill="currentColor"/></svg></div>
     <div class="titlebox">
       <h1>Hytteplanleggeren</h1>
-      <div class="sub">Åpningstid, regler og bookinger for DNT-hytter på ett sted</div>
+      <div class="sub">Ledige DNT-hytter på Østlandet</div>
     </div>
-    <div class="datebox">
+    <div class="datebox" id="dateBox">
       <label for="checkDate">Sjekk status for dato</label>
       <input type="date" id="checkDate">
     </div>
   </header>
 
   <nav class="tabs" role="tablist" aria-label="Visninger">
-    <button class="tab" role="tab" id="tab-hytter" data-tab="hytter">Hytter</button>
     <button class="tab" role="tab" id="tab-ledighet" data-tab="ledighet">Ledighet</button>
-    <button class="tab" role="tab" id="tab-opphold" data-tab="opphold">Mine opphold<span class="count" id="stopCount" hidden></span></button>
-    <button class="tab" role="tab" id="tab-guide" data-tab="guide">Slik booker du</button>
+    <button class="tab" role="tab" id="tab-hytter" data-tab="hytter">Hytter</button>
+    <button class="tab" role="tab" id="tab-opphold" data-tab="opphold">Min tur<span class="count" id="stopCount" hidden></span></button>
+    <button class="tab" role="tab" id="tab-guide" data-tab="guide">Hjelp</button>
   </nav>
 
   <main>
@@ -366,7 +371,7 @@ footer { margin-top: 28px; font-size: 12.5px; color: var(--ink-2); border-top: 1
     return st;
   }
   function isBookable(c) { if (c.book === true) return true; var li = liveInfo(c); return !!(li && li.bookable === true); }
-  var state = { ledArea: "", tab: "hytter", week: 0, date: TODAY, q: "", areas: {}, kinds: {}, dog: false, book: false, stops: [], form: { cabin: "", trip: "Min tur", date: TODAY, nights: 1, guests: 2 }, stored: false, loadErr: "" };
+  var state = { ledArea: "", tab: "ledighet", week: 0, date: TODAY, q: "", areas: {}, kinds: {}, dog: false, book: false, stops: [], form: { cabin: "", trip: "Min tur", date: TODAY, nights: 1, guests: 2 }, stored: false, loadErr: "" };
   var col = null;
 
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (ch) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch]; }); }
@@ -399,7 +404,7 @@ footer { margin-top: 28px; font-size: 12.5px; color: var(--ink-2); border-top: 1
     var list = CABINS.filter(cabinMatches);
     var counts = { open: 0, staffed: 0, closed: 0, unknown: 0, neutral: 0 };
     list.forEach(function (c) { var k = effStatus(c, state.date).kind; counts[k] = (counts[k] || 0) + 1; });
-    var html = '<div class="notice"><p>Hvor mange senger som er ledige på en bestemt dato finnes bare i DNTs bookingportal. Her ser du åpningstid for valgt dato, regler og hvilke hytter som kan bookes, og kan legge dem inn i turen din.</p><div class="row"><a class="btn small" href="' + BOOKING_URL + '" target="_blank" rel="noopener">Åpne bookingportalen</a></div></div>';
+    var html = '';
     html += '<div class="filters"><input type="search" id="q" placeholder="Søk etter hytte eller område" aria-label="Søk etter hytte eller område" value="' + esc(state.q) + '">';
     html += '<div class="chips" aria-label="Område">' + AREAS.map(function (a) { return chip(a, a, !!state.areas[a], "area"); }).join("") + "</div>";
     html += '<div class="chips" aria-label="Filtre">' + chip("betjent", "Betjent", !!state.kinds.betjent, "kind") + chip("selv", "Selvbetjent", !!state.kinds.selv, "kind") + chip("dog", "Hund mulig", state.dog, "dog") + chip("book", "Kan bookes", state.book, "book") + "</div></div>";
@@ -430,8 +435,11 @@ footer { margin-top: 28px; font-size: 12.5px; color: var(--ink-2); border-top: 1
     if (!AVAIL) return '<div class="empty"><h2>Ledighet er ikke lastet</h2><p>Fant ikke data/ledighet.json. Last siden på nytt, eller åpne bookingportalen direkte.</p><a class="btn" href="' + BOOKING_URL + '" target="_blank" rel="noopener">Åpne bookingportalen</a></div>';
     if (!liveWeeks().length) return '<div class="empty"><h2>Ingen kommende helger</h2><p>Alle helgene i øyeblikksbildet er passert. Åpne bookingportalen for oppdatert ledighet.</p><a class="btn" href="' + BOOKING_URL + '" target="_blank" rel="noopener">Åpne bookingportalen</a></div>';
     var w = liveWeeks()[state.week] || liveWeeks()[0];
-    var html = '<div class="notice"><p><strong>Øyeblikksbilde fra bookingportalen, hentet ' + esc(AVAIL.fetched) + ".</strong> " + esc(AVAIL.omrader ? AVAIL.omrader.join(", ") : AVAIL.area) + ", fredag til søndag (2 netter). " + (AVAIL.guests ? "Bare hytter med plass til " + AVAIL.guests + " gjester er med. " : "Viser ledige senger totalt, uavhengig av gjestetall. ") + "Ledighet endres hele tiden, så sjekk i portalen før du bestiller.</p>" +
-      '<div class="row"><a class="btn small" href="' + portalUrl(w) + '" target="_blank" rel="noopener">Åpne denne helgen i portalen</a></div></div>';
+    var html = "";
+    var ageDays = AVAIL.hentet ? Math.floor((Date.now() - new Date(AVAIL.hentet).getTime()) / 864e5) : 0;
+    if (ageDays >= 2) html += '<div class="notice warn"><p><strong>Dataene er ' + ageDays + ' dager gamle.</strong> Den automatiske oppdateringen har ikke gått som den skal. Sjekk portalen før du planlegger.</p></div>';
+    html += '<div class="notice slim"><span><strong>Hentet ' + esc(AVAIL.fetched) + ".</strong> Ledige senger fredag til søndag, totalt. Sjekk portalen før du bestiller.</span>" +
+      '<a class="btn small" href="' + portalUrl(w) + '" target="_blank" rel="noopener">Åpne i portalen</a></div>';
     html += '<div class="weeks" role="group" aria-label="Helg">' + liveWeeks().map(function (x, i) {
       var d1 = parse(x.from), d2 = parse(x.to);
       var label = d1.getDate() + ".–" + d2.getDate() + ". " + d2.toLocaleDateString("nb-NO", { month: "short" }).replace(".", "");
@@ -441,12 +449,12 @@ footer { margin-top: 28px; font-size: 12.5px; color: var(--ink-2); border-top: 1
     var all = liveWeeks()[0].rows.map(function (r) { return r.id; }).filter(function (id) {
       return liveWeeks().every(function (x) { return x.rows.some(function (r) { return r.id === id; }); });
     });
-    if (all.length) html += '<div class="always"><strong>Ledig alle ' + liveWeeks().length + " helgene:</strong> " + all.map(function (id) { return esc((byId[id] || {}).name || id); }).join(", ") + ".</div>";
+    if (all.length) html += '<details class="always"><summary><strong>Ledig alle ' + liveWeeks().length + " helgene:</strong> " + all.length + " hytter</summary><p>" + all.map(function (id) { return esc((byId[id] || {}).name || id); }).join(", ") + ".</p></details>";
 
     var areas = []; w.rows.forEach(function (r) { if ((r.county || r.area) && areas.indexOf(r.county || r.area) < 0) areas.push(r.county || r.area); });
     if (areas.length > 1) html += '<div class="chips" role="group" aria-label="Område">' + [""].concat(areas.sort()).map(function (a) { return '<button class="chip" type="button" data-ledarea="' + esc(a) + '" aria-pressed="' + ((state.ledArea || "") === a ? "true" : "false") + '">' + esc(a || "Alle fylker") + "</button>"; }).join("") + "</div>";
     var rows = w.rows.filter(function (r) { return !state.ledArea || (r.county || r.area) === state.ledArea; }).sort(function (a, b) { return (a.price || 1e9) - (b.price || 1e9) || (a.name < b.name ? -1 : 1); });
-    html += '<div class="summary"><strong style="color:var(--ink)">' + rows.length + " hytter har plass</strong> " + esc(fmtDate(w.from)) + " til " + esc(fmtDate(w.to)) + ". Sortert etter pris.</div>";
+    html += '<div class="summary"><strong style="color:var(--ink)">' + rows.length + " hytter har plass</strong> " + esc(fmtDate(w.from)) + " til " + esc(fmtDate(w.to)) + " Sortert etter pris.</div>";
     html += '<div class="cards">' + rows.map(function (r) {
       var beds = r.total ? r.free + " av " + r.total + " senger ledige" : "Hele hytta kan bookes";
       return '<article class="card"><div class="avrow"><h3>' + esc(r.name) + '</h3>' + (r.price ? '<span class="price">fra ' + kr(r.price) + "</span>" : "") + "</div>" +
@@ -563,6 +571,7 @@ footer { margin-top: 28px; font-size: 12.5px; color: var(--ink-2); border-top: 1
     panels.opphold.innerHTML = state.tab === "opphold" ? renderOpphold() : "";
     panels.guide.innerHTML = state.tab === "guide" ? renderGuide() : "";
     Object.keys(panels).forEach(function (k) { panels[k].hidden = k !== state.tab; });
+    var db = document.getElementById("dateBox"); if (db) db.hidden = state.tab !== "hytter";
     document.querySelectorAll(".tab").forEach(function (b) { b.setAttribute("aria-selected", b.dataset.tab === state.tab ? "true" : "false"); });
     var n = state.stops.filter(function (s) { return s.status !== "Avbestilt" && addDays(s.date, s.nights) > TODAY; }).length, cnt = document.getElementById("stopCount");
     cnt.hidden = !n; cnt.textContent = n;
