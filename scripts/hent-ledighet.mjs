@@ -44,8 +44,22 @@ const nettleser = await chromium.launch();
 const ctx = await nettleser.newContext({ locale: 'nb-NO', timezoneId: 'Europe/Oslo' });
 const side = await ctx.newPage();
 const uke0 = helger(1)[0];
-await side.goto(`${BASE}/kart?value=1223&type=area&fromDate=${uke0.from}&toDate=${uke0.to}&numberOfGuests=1&adults=1`, { waitUntil: 'domcontentloaded', timeout: 60000 });
-await side.waitForFunction(() => (window.__next_f || []).some((x) => x && typeof x[1] === 'string' && x[1].includes('"type":"cabin"')), null, { timeout: 60000 });
+const startUrl = `${BASE}/kart?value=1223&type=area&fromDate=${uke0.from}&toDate=${uke0.to}&numberOfGuests=1&adults=1`;
+let klar = false;
+for (let forsok = 1; forsok <= 4 && !klar; forsok++) {
+  try {
+    const svar = await side.goto(startUrl, { waitUntil: 'domcontentloaded', timeout: 90000 });
+    console.log(`Forsøk ${forsok}: HTTP ${svar ? svar.status() : '?'}`);
+    await side.waitForFunction(() => (window.__next_f || []).some((x) => x && typeof x[1] === 'string' && x[1].includes('"type":"cabin"')), null, { timeout: 90000 });
+    klar = true;
+  } catch (e) {
+    const tittel = await side.title().catch(() => '?');
+    const tekst = await side.evaluate(() => document.body.innerText.slice(0, 300).replace(/\s+/g, ' ')).catch(() => '?');
+    console.log(`Forsøk ${forsok} feilet: ${e.message.split('\n')[0]} | tittel: "${tittel}" | side: "${tekst}"`);
+    if (forsok < 4) await new Promise((r) => setTimeout(r, 20000 * forsok));
+  }
+}
+if (!klar) { console.error('Fikk ikke hyttelisten fra portalen. Avbryter uten å skrive fil.'); process.exit(1); }
 
 // Hele hyttelisten ligger innebygd i siden (Next.js-data).
 const alle = await side.evaluate(() => {
