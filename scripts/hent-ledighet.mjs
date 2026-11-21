@@ -88,25 +88,28 @@ const ukene = helger(cfg.antallHelger);
 const uker = []; let kall = 0, feil = 0;
 for (const uke of ukene) {
   const svar = await side.evaluate(async ({ hytter, fra, til }) => {
-    const ut = []; let neste = 0;
-    async function jobb() {
-      while (neste < hytter.length) {
-        const h = hytter[neste++]; let data = null, ok = false;
-        for (let forsok = 0; forsok < 3 && !ok; forsok++) {
-          try {
-            const r = await fetch(`/api/booking/cabin-availability?cabinId=${h.id}&fromDate=${fra}&toDate=${til}`);
-            if (r.ok) { data = (await r.json()).data || null; ok = true; }
-          } catch (e) { /* prøv igjen */ }
-          if (!ok) await new Promise((res) => setTimeout(res, 500 * (forsok + 1)));
-        }
-        ut.push({ id: h.id, ok, data });
+    const sov = (ms) => new Promise((res) => setTimeout(res, ms));
+    const status = {};
+    async function hent(h) {
+      for (let forsok = 0; forsok < 6; forsok++) {
+        try {
+          const r = await fetch(`/api/booking/cabin-availability?cabinId=${h.id}&fromDate=${fra}&toDate=${til}`);
+          status[r.status] = (status[r.status] || 0) + 1;
+          if (r.ok) return { id: h.id, ok: true, data: (await r.json()).data || null };
+          const ventSek = Number(r.headers.get('retry-after'));
+          await sov(ventSek > 0 ? Math.min(ventSek, 30) * 1000 : 1000 * 2 ** forsok);
+        } catch (e) { status.nettfeil = (status.nettfeil || 0) + 1; await sov(1000 * 2 ** forsok); }
       }
+      return { id: h.id, ok: false, data: null };
     }
-    await Promise.all(Array.from({ length: 6 }, jobb));
-    return ut;
+    const ut = []; let neste = 0;
+    async function jobb() { while (neste < hytter.length) { const h = hytter[neste++]; ut.push(await hent(h)); await sov(150); } }
+    await Promise.all(Array.from({ length: 3 }, jobb));
+    return { ut, status };
   }, { hytter: valgte, fra: uke.from, til: uke.to });
+  console.log(`  statuskoder: ${JSON.stringify(svar.status)}`);
   const rader = [];
-  for (const s of svar) {
+  for (const s of svar.ut) {
     kall++;
     if (!s.ok) { feil++; continue; }
     const rad = tilRad(valgte.find((h) => h.id === s.id), s.data);
