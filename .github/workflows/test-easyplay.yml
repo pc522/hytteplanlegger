@@ -1,0 +1,29 @@
+name: Test easyplay
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Hent kalendere fra easyplay
+        run: |
+          node -e '
+          const UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36";
+          (async () => {
+            const tr = await fetch("https://www.easyplay.no/api/easyplay/token/public", { headers: { "user-agent": UA } });
+            console.log("token HTTP", tr.status);
+            if (!tr.ok) { console.log((await tr.text()).slice(0, 200)); process.exit(1); }
+            const token = (await tr.json()).token;
+            const baner = { Stabaek: "rJ9L60cBAfdTmNsXnF1C", Ohil: "unEsdguzCoZ8yVTIH1TJ", Hovik: "d45f02b4-37a6-4ce4-859b-30767b96544c" };
+            for (const [navn, id] of Object.entries(baner)) {
+              const r = await fetch(`https://api.easyplay.no/live_events/stadium/${id}/public`, { headers: { authorization: "Bearer " + token, "user-agent": UA } });
+              if (!r.ok) { console.log(navn, "HTTP", r.status, (await r.text()).slice(0, 150)); continue; }
+              const j = await r.json();
+              const fremover = j.filter((e) => e.date >= "2026-11-22");
+              console.log(navn, "HTTP", r.status, "hendelser:", j.length, "fra i dag:", fremover.length, "publikumstid:", fremover.filter((e) => /publikum|åpen skøyt/i.test(e.title)).length);
+            }
+          })().catch((e) => { console.log("FEIL", e.message); process.exit(1); });
+          '
