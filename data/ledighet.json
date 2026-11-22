@@ -1,6 +1,6 @@
 {
- "fetched": "21. november 2026 kl. 22:33",
- "hentet": "2026-11-21T21:33:44.296Z",
+ "fetched": "22. november 2026 kl. 07:22",
+ "hentet": "2026-11-22T06:22:30.274Z",
  "omrader": [
   "Oslo",
   "Akershus",
@@ -70,18 +70,18 @@
    "bookbar": true
   },
   {
-   "id": "c10880",
-   "name": "Mule Varde Turisthytte",
-   "area": "Grenland",
-   "county": "Telemark",
-   "bookbar": false
-  },
-  {
    "id": "c101317791",
    "name": "Pynten",
    "area": "Oslofjorden",
    "county": "Østfold",
    "bookbar": true
+  },
+  {
+   "id": "c10880",
+   "name": "Mule Varde Turisthytte",
+   "area": "Grenland",
+   "county": "Telemark",
+   "bookbar": false
   },
   {
    "id": "c10668",
@@ -483,13 +483,6 @@
    "bookbar": true
   },
   {
-   "id": "c101210144",
-   "name": "Tyristua",
-   "area": "Oslofjorden",
-   "county": "Vestfold",
-   "bookbar": true
-  },
-  {
    "id": "c10494",
    "name": "Grimsdalshytta",
    "area": "Rondane",
@@ -574,32 +567,11 @@
    "bookbar": true
   },
   {
-   "id": "c10315242",
-   "name": "Arnbjørnrud",
-   "area": "Østfold",
-   "county": "Østfold",
-   "bookbar": true
-  },
-  {
    "id": "c10186276",
    "name": "Vollumssætra",
    "area": "Gjøvik, Land og Toten",
    "county": "Innlandet",
    "bookbar": false
-  },
-  {
-   "id": "c101317782",
-   "name": "Bjørkebu",
-   "area": "Langsua",
-   "county": "Innlandet",
-   "bookbar": true
-  },
-  {
-   "id": "c10660",
-   "name": "Haukeliseter fjellstue",
-   "area": "Hardangervidda",
-   "county": "Telemark",
-   "bookbar": true
   },
   {
    "id": "c10653",
@@ -665,13 +637,6 @@
    "bookbar": true
   },
   {
-   "id": "c101151322",
-   "name": "Stenfjellhytta ubetjent",
-   "area": "Hedmarken og Hedmarksvidda",
-   "county": "Innlandet",
-   "bookbar": true
-  },
-  {
    "id": "c10722",
    "name": "Narjordet",
    "area": "Femundsmarka",
@@ -683,13 +648,6 @@
    "name": "Gammelsaga",
    "area": "Hedmarken og Hedmarksvidda",
    "county": "Innlandet",
-   "bookbar": true
-  },
-  {
-   "id": "c10876250",
-   "name": "Trollsvann Annekset og Hunderom",
-   "area": "Vestfoldmarka",
-   "county": "Vestfold",
    "bookbar": true
   },
   {
@@ -711,20 +669,6 @@
    "name": "Hytta på Skjerva",
    "area": "Hadeland",
    "county": "Akershus",
-   "bookbar": true
-  },
-  {
-   "id": "c10623",
-   "name": "Trollsvannstua",
-   "area": "Vestfoldmarka",
-   "county": "Vestfold",
-   "bookbar": true
-  },
-  {
-   "id": "c101295",
-   "name": "Øyungshytta",
-   "area": "Hedmarken og Hedmarksvidda",
-   "county": "Innlandet",
    "bookbar": true
   },
   {
@@ -1344,6 +1288,13 @@
    "bookbar": true
   },
   {
+   "id": "c10876250",
+   "name": "Trollsvann Annekset og Hunderom",
+   "area": "Vestfoldmarka",
+   "county": "Vestfold",
+   "bookbar": true
+  },
+  {
    "id": "c10636",
    "name": "Hellevassbu",
    "area": "Hardangervidda",
@@ -1358,6 +1309,41 @@
    "bookbar": false
   },
   {
+   "id": "c101295",
+   "name": "Øyungshytta",
+   "area": "Hedmarken og Hedmarksvidda",
+   "county": "Innlandet",
+   "bookbar": true
+  },
+  {
+   "id": "c10315242",
+   "name": "Arnbjørnrud",
+   "area": "Østfold",
+   "county": "Østfold",
+   "bookbar": true
+  },
+  {
+   "id": "c101317782",
+   "name": "Bjørkebu",
+   "area": "Langsua",
+   "county": "Innlandet",
+   "bookbar": true
+  },
+  {
+   "id": "c10660",
+   "name": "Haukeliseter fjellstue",
+   "area": "Hardangervidda",
+   "county": "Telemark",
+   "bookbar": true
+  },
+  {
+   "id": "c101151322",
+   "name": "Stenfjellhytta ubetjent",
+   "area": "Hedmarken og Hedmarksvidda",
+   "county": "Innlandet",
+   "bookbar": true
+  },
+  {
    "id": "c10258",
    "name": "Høgevarde gamle",
    "area": "Norefjell og Eggedalsfjella",
@@ -1369,6 +1355,20 @@
    "name": "Ringkolltoppen",
    "area": "Oslomarka",
    "county": "Buskerud",
+   "bookbar": true
+  },
+  {
+   "id": "c10623",
+   "name": "Trollsvannstua",
+   "area": "Vestfoldmarka",
+   "county": "Vestfold",
+   "bookbar": true
+  },
+  {
+   "id": "c101210144",
+   "name": "Tyristua",
+   "area": "Oslofjorden",
+   "county": "Vestfold",
    "bookbar": true
   },
   {
@@ -4426,7 +4426,7 @@
      "area": "Oslomarka",
      "areaId": 1223,
      "county": "Akershus",
-     "free": 6,
+     "free": 8,
      "total": 8,
      "price": 520
     },
@@ -5732,7 +5732,7 @@
      "area": "Oslomarka",
      "areaId": 1223,
      "county": "Akershus",
-     "free": 8,
+     "free": 3,
      "total": 8,
      "price": 520
     },
