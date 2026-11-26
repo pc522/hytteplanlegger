@@ -1,6 +1,6 @@
 {
- "fetched": "25. november 2026 kl. 07:23",
- "hentet": "2026-11-25T06:23:31.940Z",
+ "fetched": "26. november 2026 kl. 07:27",
+ "hentet": "2026-11-26T06:27:34.761Z",
  "omrader": [
   "Oslo",
   "Akershus",
@@ -100,13 +100,6 @@
   {
    "id": "c101067",
    "name": "Goliaten",
-   "area": "Drammensmarka og Finnemarka",
-   "county": "Buskerud",
-   "bookbar": true
-  },
-  {
-   "id": "c101317794",
-   "name": "Turisten",
    "area": "Drammensmarka og Finnemarka",
    "county": "Buskerud",
    "bookbar": true
@@ -900,7 +893,7 @@
    "name": "Øitangen",
    "area": "Telemark",
    "county": "Telemark",
-   "bookbar": true
+   "bookbar": false
   },
   {
    "id": "c10786",
@@ -1316,13 +1309,6 @@
    "bookbar": true
   },
   {
-   "id": "c10645",
-   "name": "Kobberhaughytta",
-   "area": "Oslomarka",
-   "county": "Oslo",
-   "bookbar": true
-  },
-  {
    "id": "c10636",
    "name": "Hellevassbu",
    "area": "Hardangervidda",
@@ -1335,6 +1321,13 @@
    "area": "Breheimen med Jostedalsbreen",
    "county": "Innlandet",
    "bookbar": false
+  },
+  {
+   "id": "c10257",
+   "name": "Vikerkoia og Gamle Vikerkoia",
+   "area": "Holleia, Vikerfjell og Vassfaret",
+   "county": "Buskerud",
+   "bookbar": true
   },
   {
    "id": "c101114465",
@@ -1354,6 +1347,13 @@
    "id": "c101301633",
    "name": "Ringkolltoppen",
    "area": "Oslomarka",
+   "county": "Buskerud",
+   "bookbar": true
+  },
+  {
+   "id": "c101317794",
+   "name": "Turisten",
+   "area": "Drammensmarka og Finnemarka",
    "county": "Buskerud",
    "bookbar": true
   },
@@ -1519,13 +1519,6 @@
    "bookbar": true
   },
   {
-   "id": "c10257",
-   "name": "Vikerkoia og Gamle Vikerkoia",
-   "area": "Holleia, Vikerfjell og Vassfaret",
-   "county": "Buskerud",
-   "bookbar": true
-  },
-  {
    "id": "c10504",
    "name": "Skriurusten",
    "area": "Langsua",
@@ -1551,6 +1544,13 @@
    "name": "Styggemannshytta",
    "area": "Skrim, Vindfjell",
    "county": "Buskerud",
+   "bookbar": true
+  },
+  {
+   "id": "c10645",
+   "name": "Kobberhaughytta",
+   "area": "Oslomarka",
+   "county": "Oslo",
    "bookbar": true
   },
   {
@@ -1826,6 +1826,16 @@
      "price": 520
     },
     {
+     "id": "c101124534",
+     "name": "Sandbekkhytta",
+     "area": "Oslomarka",
+     "areaId": 1223,
+     "county": "Akershus",
+     "free": 4,
+     "total": 4,
+     "price": 800
+    },
+    {
      "id": "c10826",
      "name": "Snellingen",
      "area": "Oslomarka",
@@ -1851,7 +1861,7 @@
      "area": "Oslomarka",
      "areaId": 1223,
      "county": "Akershus",
-     "free": 2,
+     "free": 1,
      "total": 8,
      "price": 520
     },
@@ -2186,16 +2196,6 @@
      "price": 520
     },
     {
-     "id": "c101274",
-     "name": "DNT Osbakken",
-     "area": "Gjøvik, Land og Toten",
-     "areaId": 1275,
-     "county": "Innlandet",
-     "free": 7,
-     "total": 7,
-     "price": 580
-    },
-    {
      "id": "c10222",
      "name": "Fogdehytta",
      "area": "Gjøvik, Land og Toten",
@@ -2361,7 +2361,7 @@
      "area": "Hedmarken og Hedmarksvidda",
      "areaId": 1221,
      "county": "Innlandet",
-     "free": 8,
+     "free": 7,
      "total": 8,
      "price": 520
     },
@@ -2771,7 +2771,7 @@
      "area": "Hardangervidda",
      "areaId": 1235,
      "county": "Telemark",
-     "free": 91,
+     "free": 92,
      "total": 144,
      "price": 520
     },
@@ -2814,16 +2814,6 @@
      "free": 2,
      "total": 2,
      "price": 520
-    },
-    {
-     "id": "c101273",
-     "name": "Øitangen",
-     "area": "Telemark",
-     "areaId": 1270,
-     "county": "Telemark",
-     "free": 11,
-     "total": 88,
-     "price": 1500
     },
     {
      "id": "c101210144",
@@ -2891,7 +2881,7 @@
      "area": "Østfold",
      "areaId": 1214,
      "county": "Østfold",
-     "free": 12,
+     "free": 10,
      "total": 12,
      "price": 520
     },
@@ -3127,7 +3117,7 @@
      "area": "Drammensmarka og Finnemarka",
      "areaId": 1216,
      "county": "Buskerud",
-     "free": 8,
+     "free": 7,
      "total": 8,
      "price": 520
     },
@@ -3637,7 +3627,7 @@
      "area": "Hedmarken og Hedmarksvidda",
      "areaId": 1221,
      "county": "Innlandet",
-     "free": 6,
+     "free": 8,
      "total": 8,
      "price": 520
     },
@@ -4102,16 +4092,6 @@
      "price": 520
     },
     {
-     "id": "c101273",
-     "name": "Øitangen",
-     "area": "Telemark",
-     "areaId": 1270,
-     "county": "Telemark",
-     "free": 11,
-     "total": 88,
-     "price": 1500
-    },
-    {
      "id": "c10261",
      "name": "Brannåsen",
      "area": "Oslofjorden",
@@ -4373,7 +4353,7 @@
      "area": "Oslomarka",
      "areaId": 1223,
      "county": "Akershus",
-     "free": 5,
+     "free": 1,
      "total": 5,
      "price": 165
     },
@@ -5376,16 +5356,6 @@
      "free": 2,
      "total": 2,
      "price": 520
-    },
-    {
-     "id": "c101273",
-     "name": "Øitangen",
-     "area": "Telemark",
-     "areaId": 1270,
-     "county": "Telemark",
-     "free": 11,
-     "total": 88,
-     "price": 1500
     },
     {
      "id": "c10261",
@@ -6679,7 +6649,7 @@
      "area": "Hardangervidda",
      "areaId": 1235,
      "county": "Telemark",
-     "free": 94,
+     "free": 90,
      "total": 144,
      "price": 520
     },
@@ -6722,16 +6692,6 @@
      "free": 2,
      "total": 2,
      "price": 520
-    },
-    {
-     "id": "c101273",
-     "name": "Øitangen",
-     "area": "Telemark",
-     "areaId": 1270,
-     "county": "Telemark",
-     "free": 11,
-     "total": 88,
-     "price": 1500
     },
     {
      "id": "c10261",
@@ -6842,16 +6802,6 @@
      "free": 15,
      "total": 15,
      "price": 520
-    },
-    {
-     "id": "c10755",
-     "name": "Ravnsjøhytta",
-     "area": "Østfold",
-     "areaId": 1214,
-     "county": "Østfold",
-     "free": 14,
-     "total": 14,
-     "price": 1350
     },
     {
      "id": "c101317739",
@@ -8150,16 +8100,6 @@
      "price": 520
     },
     {
-     "id": "c101273",
-     "name": "Øitangen",
-     "area": "Telemark",
-     "areaId": 1270,
-     "county": "Telemark",
-     "free": 11,
-     "total": 88,
-     "price": 1500
-    },
-    {
      "id": "c10261",
      "name": "Brannåsen",
      "area": "Oslofjorden",
@@ -8384,6 +8324,16 @@
      "free": 17,
      "total": 17,
      "price": 550
+    },
+    {
+     "id": "c101317685",
+     "name": "Elgstua - Sæteren Gård",
+     "area": "Oslomarka",
+     "areaId": 1223,
+     "county": "Akershus",
+     "free": 4,
+     "total": 4,
+     "price": 800
     },
     {
      "id": "c101170962",
@@ -9471,7 +9421,7 @@
      "area": "Hardangervidda",
      "areaId": 1235,
      "county": "Telemark",
-     "free": 66,
+     "free": 64,
      "total": 144,
      "price": 550
     },
@@ -9514,16 +9464,6 @@
      "free": 2,
      "total": 2,
      "price": 550
-    },
-    {
-     "id": "c101273",
-     "name": "Øitangen",
-     "area": "Telemark",
-     "areaId": 1270,
-     "county": "Telemark",
-     "free": 11,
-     "total": 88,
-     "price": 1500
     },
     {
      "id": "c10261",
@@ -10832,16 +10772,6 @@
      "price": 550
     },
     {
-     "id": "c101273",
-     "name": "Øitangen",
-     "area": "Telemark",
-     "areaId": 1270,
-     "county": "Telemark",
-     "free": 11,
-     "total": 88,
-     "price": 1500
-    },
-    {
      "id": "c10668",
      "name": "Knudsrød",
      "area": "Oslofjorden",
@@ -11923,7 +11853,7 @@
      "area": "Oslomarka",
      "areaId": 1223,
      "county": "Oslo",
-     "free": 8,
+     "free": 4,
      "total": 8,
      "price": 550
     },
@@ -12106,16 +12036,6 @@
      "free": 2,
      "total": 2,
      "price": 550
-    },
-    {
-     "id": "c101273",
-     "name": "Øitangen",
-     "area": "Telemark",
-     "areaId": 1270,
-     "county": "Telemark",
-     "free": 11,
-     "total": 88,
-     "price": 1500
     },
     {
      "id": "c10668",
